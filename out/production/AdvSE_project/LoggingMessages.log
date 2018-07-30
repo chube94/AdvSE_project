@@ -1,0 +1,14 @@
+Jul 19, 2018 1:34:12 PM hardwarestore.MainApp main
+INFO: Logging begins...
+Jul 19, 2018 1:34:12 PM hardwarestore.MainApp createFrame
+INFO: Main Frame is created
+Jul 19, 2018 1:34:37 PM hardwarestore.MainApp$2 actionPerformed
+INFO: User displays list of all Existing Items
+Jul 19, 2018 1:34:41 PM hardwarestore.MainApp$8 actionPerformed
+INFO: User decides if they want to edit Customer or Employee info
+Jul 19, 2018 1:34:52 PM hardwarestore.MainApp$6 actionPerformed
+INFO: User displays list of Users 
+Jul 19, 2018 1:35:00 PM hardwarestore.MainApp$3 actionPerformed
+INFO: User chooses if they want to add an Appliance or Hardware Item
+Jul 19, 2018 1:35:18 PM hardwarestore.MainApp$1 windowClosing
+INFO: Database is saved

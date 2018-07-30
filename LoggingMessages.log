@@ -1,0 +1,24 @@
+Jul 30, 2018 4:21:50 PM hardwarestore.MainApp main
+INFO: Logging begins...
+Jul 30, 2018 4:21:50 PM hardwarestore.MainApp createFrame
+INFO: Main Frame is created
+Jul 30, 2018 4:22:08 PM hardwarestore.MainApp$3 actionPerformed
+INFO: User chooses if they want to add an Appliance or Hardware Item
+Jul 30, 2018 4:22:22 PM hardwarestore.MainApp$2 actionPerformed
+INFO: User displays list of all Existing Items
+Jul 30, 2018 4:30:15 PM hardwarestore.MainApp$6 actionPerformed
+INFO: User displays list of Users 
+Jul 30, 2018 4:38:15 PM hardwarestore.MainApp$2 actionPerformed
+INFO: User displays list of all Existing Items
+Jul 30, 2018 4:38:58 PM hardwarestore.MainApp$5 actionPerformed
+INFO: User displays list of Item's containing the given name
+Jul 30, 2018 4:39:13 PM hardwarestore.MainApp$3 actionPerformed
+INFO: User chooses if they want to add an Appliance or Hardware Item
+Jul 30, 2018 4:39:52 PM hardwarestore.MainApp$10 actionPerformed
+INFO: User shows list of all Completed Transactions
+Jul 30, 2018 4:40:32 PM hardwarestore.MainApp$5 actionPerformed
+INFO: User displays list of Item's containing the given name
+Jul 30, 2018 4:42:34 PM hardwarestore.MainApp$3 actionPerformed
+INFO: User chooses if they want to add an Appliance or Hardware Item
+Jul 30, 2018 4:45:43 PM hardwarestore.MainApp$1 windowClosing
+INFO: Database is saved
