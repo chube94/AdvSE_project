@@ -1,4 +1,9 @@
-
+/** 
+*
+*Setting up applicance class constructors and getters
+*
+*
+**/
 
 package hardwarestore.items;
 
