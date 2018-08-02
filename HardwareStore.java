@@ -1,3 +1,4 @@
+
 package hardwarestore;
 
 import java.io.*;
@@ -38,7 +39,7 @@ public class HardwareStore {
      * @param items the item list to be displayed.
      * @return a formatted String representation of all the items in the list
      */
-    private String getFormattedItemList(ArrayList<Item> items) {
+    public String getFormattedItemList(ArrayList<Item> items) {
 
         String text = " ------------------------------------------------------------------------------------------------------------------\n" +
                 String.format("| %-8s| %-25s| %-10s| %-10s| %-20s| %-30s|%n", "Item ID", "Name", "Quantity", "Price", "Item Type", "Category / Brand and type") +
@@ -371,6 +372,22 @@ public class HardwareStore {
             return null;
         }
     }
+    
+    /**
+     * used to retrieve the User object from the userList at the given index 
+     * 
+     * @param i the index of the desired User object
+     * @return the User object at the index or null if their index is invalid
+     */
+    public User getUser(int i) {
+        if (i < userList.size() && i >= 0) {
+            return userList.get(i);
+        } else {
+            System.out.println("Invalid Index.");
+            return null;
+        }
+    }
+    
 
     /**
      * adds a transaction to the list, and removes the quantity for the target item.
