@@ -1,23 +1,15 @@
+package hardwarestore;
 
-
-package hardwarestore.items;
-
-
-/**
- *
- * @author Junye Wen modified by William Hubert
- */
 public class SmallHardwareItems extends Item {
     protected final String category;
 
     /**
-     * Constructor initializes a customer object with the provided values.
+     * initializes a customer object with the provided values
      * @param idNumber
      * @param name
      * @param quantity
      * @param price
-     * @param category a <b><CODE>String</CODE></b> that represents the category.
-     *                “Door&Window”, “Cabinet& Furniture”, “Fasteners”, “Structural”, “Other”.
+     * @param category 
      */
     public SmallHardwareItems(String idNumber, String name, int quantity, float price, String category) {
         super(idNumber, name, quantity, price);
@@ -25,7 +17,7 @@ public class SmallHardwareItems extends Item {
     }
 
     /**
-     * Get the category.
+     * returns the category.
      * @return category
      */
     public String getCategory() {
@@ -34,7 +26,7 @@ public class SmallHardwareItems extends Item {
 
 
     /**
-     * Returns the attributes of the small hardware item, in a formatted text fashion.
+     * Returns the attributes of the small hardware item in formatted text
      * @return Formatted Text.
      */
     @Override
