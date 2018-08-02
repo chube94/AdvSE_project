@@ -1,17 +1,11 @@
+package hardwarestore;
 
-
-package hardwarestore.users;
-
-/**
- * Employee is a subclass of User
- * @author Junye Wen modified by William HubertF
- */
 public class Employee extends User {
     private int socialSecurityNumber;
     private float monthlySalary;
 
     /**
-     * Constructor initializes an employee object with the provided values.
+     * initializes an employee object with the provided values.
      * @param id
      * @param firstName
      * @param lastName
@@ -25,7 +19,7 @@ public class Employee extends User {
     }
 
     /**
-     * Get the SSN.
+     * returns the SSN.
      * @return socialSecurityNumber
      */
     public int getSocialSecurityNumber() {
@@ -41,7 +35,7 @@ public class Employee extends User {
     }
 
     /**
-     * Get the monthly salary.
+     * returns the monthly salary.
      * @return monthlySalary
      */
     public float getMonthlySalary() {
@@ -58,7 +52,7 @@ public class Employee extends User {
 
 
     /**
-     * Returns the attributes of the employee, in a formatted text fashion.
+     * Returns the attributes of the employee in formatted text
      * @return Formatted Text.
      */
     @Override
