@@ -1,13 +1,7 @@
-
-
-package hardwarestore.users;
+package hardwarestore;
 
 import java.io.Serializable;
 
-/**
- * User is a superclass for all specific types of actors in the system
- * @author Junye Wen modified by William Hubert
- */
 public abstract class User implements Serializable {
 
     protected final int id;
@@ -16,7 +10,7 @@ public abstract class User implements Serializable {
     public final boolean isEmployee;
 
     /**
-     * Constructor initializes a user object with the provided values.
+     * initializes a user object with the provided values
      * @param id User ID
      * @param firstName First Name
      * @param lastName Last Name
@@ -29,7 +23,7 @@ public abstract class User implements Serializable {
     }
 
     /**
-     * Get the last name.
+     * returns the last name
      * @return lastName Last Name
      */
     public String getLastName() {
@@ -37,7 +31,7 @@ public abstract class User implements Serializable {
     }
 
     /**
-     * Set the last name.
+     * Set the last name
      * @param lastName Last Name
      */
     public void setLastName(String lastName) {
@@ -45,7 +39,7 @@ public abstract class User implements Serializable {
     }
 
     /**
-     * Get the user ID.
+     * returns the user ID
      * @return id
      */
     public int getId() {
@@ -53,7 +47,7 @@ public abstract class User implements Serializable {
     }
 
     /**
-     * Get the first name.
+     * returns the first name
      * @return firstName
      */
     public String getFirstName() {
@@ -61,7 +55,7 @@ public abstract class User implements Serializable {
     }
 
     /**
-     * Set the first name.
+     * Set the first name
      * @param firstName First Name
      */
     public void setFirstName(String firstName) {
@@ -69,8 +63,9 @@ public abstract class User implements Serializable {
     }
 
     /**
-     * Abstract print method, to be implemented by subclasses of class User.
-     * @return
+     * Abstract print method implemented by subclasses user
+     * @return 
      */
     public abstract String getFormattedText();
 }
+
