@@ -1,18 +1,11 @@
+package hardwarestore;
 
-
-package hardwarestore.users;
-
-
-/**
- *
- * @author Junye Wen modified by William Hubert
- */
 public class Customer extends User {
     private String phoneNumber;
     private String address;
 
     /**
-     * Constructor initializes a customer object with the provided values.
+     * initializes a customer object with provided values
      * @param id
      * @param phoneNumber
      * @param address
@@ -26,7 +19,7 @@ public class Customer extends User {
     }
 
     /**
-     * Get the phone number.
+     * returns the phone number.
      * @return phoneNumber
      */
     public String getPhoneNumber() {
@@ -42,7 +35,7 @@ public class Customer extends User {
     }
 
     /**
-     * Get the address.
+     * returns the address.
      * @return address
      */
     public String getAddress() {
@@ -56,9 +49,9 @@ public class Customer extends User {
     public void setAddress(String address) {
         this.address = address;
     }
-
+    
     /**
-     * Returns the attributes of the customer, in a formatted text fashion.
+     * Returns the attributes of the customes in a formatted text
      * @return Formatted Text.
      */
     @Override
