@@ -1,14 +1,8 @@
-
-
 package hardwarestore;
 
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * This class represents a transaction in the Hardware Store Software.
- * @author Junye Wen modified by William Hubert
- */
 public class Transaction implements Serializable {
     private final String itemID;
     private final Date saleDate;
@@ -17,7 +11,7 @@ public class Transaction implements Serializable {
     private final int employeeId;
 
     /**
-     * Constructor initializes a SaleTransaction object with the provided values.
+     * initializes a SaleTransaction object with the provided values
      * @param itemID
      * @param saleDate
      * @param saleQuantity
@@ -33,7 +27,7 @@ public class Transaction implements Serializable {
     }
 
     /**
-     * Get the item ID of this transaction.
+     * returns the item ID of this transaction
      * @return itemID
      */
     public String getItemID() {
@@ -41,7 +35,7 @@ public class Transaction implements Serializable {
     }
 
     /**
-     * Get the sale date of this transaction.
+     * returns the sale date of this transaction
      * @return saleDate
      */
     public Date getsaleDate() {
@@ -49,7 +43,7 @@ public class Transaction implements Serializable {
     }
 
     /**
-     * Get the sale quantity of this transaction.
+     * returns the quantity of this transaction
      * @return saleQuantity
      */
     public int getSaleQuantity() {
@@ -57,7 +51,7 @@ public class Transaction implements Serializable {
     }
 
     /**
-     * Get the customer ID of this transaction.
+     * returns the customer ID of this transaction
      * @return customerId
      */
     public int getCustomerId() {
@@ -65,13 +59,17 @@ public class Transaction implements Serializable {
     }
 
     /**
-     * Get the employee ID of this transaction.
+     * returns the employee ID of this transaction
      * @return
      */
     public int getEmployeeId() {
         return employeeId;
     }
 
+    /**
+     * returns transaction attributes in formatted text 
+     * @return
+     */
     public String getFormattedText() {
         return String.format("| %-10s| %-30s| %-10s| %-12s| %-12s|%n",
                 itemID, saleDate, saleQuantity, customerId, employeeId);
