@@ -1,7 +1,4 @@
-
-package hardwarestore.items;
-
-
+package hardwarestore;
 
 import java.io.Serializable;
 
@@ -17,10 +14,9 @@ public abstract class Item implements Serializable {
      * user input validation. That should be handled by the class that creates a
      * item object.
      *
-     * @param idNumber a <b><CODE>String</CODE></b> that represents the ID
-     *                 random string of length 5 – can contain letters and numbers
-     * @param name a <b><CODE>String</CODE></b> that represents the name
-     * @param price an <b><CODE>float</CODE></b> that represents the price
+     * @param idNumber 
+     * @param name 
+     * @param price
      */
     public Item(String idNumber, String name, int quantity, float price) {
         this.idNumber = idNumber;
@@ -30,64 +26,64 @@ public abstract class Item implements Serializable {
     }
 
     /**
-     * This method returns the item's tracking number.
+     * returns the items tracking number
      *
-     * @return a <b><CODE>String</CODE></b> that is the ID number of the item.
+     * @return a String that is the ID number of the item.
      */
     public String getIdNumber() {
         return idNumber;
     }
 
     /**
-     * This method returns the item's name.
+     * returns the items name.
      *
-     * @return a <b><CODE>String</CODE></b> that is the item's name.
+     * @return a String that is the item's name.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * This method returns the item's quantity.
+     * returns the item's quantity.
      *
-     * @return an <b><CODE>int</CODE></b> that is the item's weight
+     * @return an int that is the item's weight
      */
     public int getQuantity() {
         return quantity;
     }
 
     /**
-     * This method set the item's quantity.
+     * set the item's quantity.
      *
-     *  @param quantity a <b><CODE>int</CODE></b> that represents the quantity
+     *  @param quantity an int that represents the quantity
      */
     public void setQuantity(int quantity) {
         this.quantity= quantity;
     }
 
     /**
-     * This method returns the item's price.
+     * returns the item's price.
      *
-     * @return a <b><CODE>float</CODE></b> that is the item's price
+     * @return a float that is the item's price
      */
     public float getPrice() {
         return price;
     }
 
     /**
-     * This method provides a way to compare two item objects.
+     * provides a way to compare two item objects.
      *
-     * @param c a <b><CODE>Item</CODE></b> object that is used to compare to
-     * <b><CODE>this</CODE></b> item. Two orders are equal if their ID is the
+     * @param c a Item object that is used to compare to
+     * this item. Two orders are equal if their ID is the
      * same.
-     * @return the <CODE>boolean</CODE> value of the comparison.
+     * @return the boolean value of the comparison.
      */
     public boolean equals(Item c) {
         return c.getIdNumber().equals(this.idNumber);
     }
 
     /**
-     * Abstract print method, to be implemented by subclasses of class User.
+     * Abstract print method, implemented by subclasses of class User.
      * @return
      */
     public abstract String getFormattedText();
