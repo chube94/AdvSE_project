@@ -1,40 +1,35 @@
-
 package hardwarestore;
 
 import java.util.logging.*;
-import java.util.ArrayList;
-import hardwarestore.items.Item;
-import hardwarestore.users.User;
 import java.awt.*;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.*;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
-import java.awt.geom.*;
 import javax.swing.*;
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * This is the main class of the Hardware Store database manager. It provides a
  * GUI for the user to input data
  *
- * @author Junye Wen modified by @author William Hubert
- *
+ * @author William Hubert
+ * @version 7-30-18
  */
 public class MainApp extends JFrame{
 
-  // This object is used to log all User interactions with the GUI and for possible errors and exceptions
-  private static final Logger logger = Logger.getLogger(MainApp.class.getName());
-  //This object is used to write all logging messages to a file
-  private static FileHandler fh = null;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	// This object is used to log all User interactions with the GUI and for possible errors and exceptions
+	private static final Logger logger = Logger.getLogger(MainApp.class.getName());
+	//This object is used to write all logging messages to a file
+	private static FileHandler fh = null;
     // This object will allow us to interact with the methods of the class HardwareStore
     private HardwareStore hardwareStore;
-    private static final Scanner CONSOLE_INPUT = new Scanner(System.in); // Used to read from System's standard input
-
     /**
      * Default constructor. Initializes a new object of type HardwareStore and
      *adds the FileHandler fh to the logging object
@@ -65,7 +60,7 @@ public class MainApp extends JFrame{
 
 
 /**
-*This method is used to creat the GUI main frame that holds all of the GUI components
+*This method is used to create the GUI main frame that holds all of the GUI components
 *used in this program.
 */
      public void createFrame() throws Exception{
@@ -123,7 +118,8 @@ public class MainApp extends JFrame{
 *This method is used to show all of the Items in the list when the user clicks button 1
 *@param e is the action of the user clicking button1
 */
-           public void actionPerformed(ActionEvent e){
+           @SuppressWarnings("deprecation")
+		public void actionPerformed(ActionEvent e){
            HardwareStore.sortItemList();
            String str = hardwareStore.getAllItemsFormatted();
            JTextArea textArea = new JTextArea(str);
@@ -205,7 +201,7 @@ public class MainApp extends JFrame{
                   String name = "";
                   Integer quantity = 0;
                   Float price = Float.parseFloat("0");
-                  int result = JOptionPane.showConfirmDialog(null, myPanel,
+                  JOptionPane.showConfirmDialog(null, myPanel,
                   "Please Enter ID and Name of Item", JOptionPane.OK_CANCEL_OPTION);
                   myPanel.setLayout(new FlowLayout());
                   try
@@ -276,7 +272,7 @@ public class MainApp extends JFrame{
               String name = "";
               Integer quantity = 0;
               Float price = Float.parseFloat("0");
-              int result = JOptionPane.showConfirmDialog(null, myPanel,
+              JOptionPane.showConfirmDialog(null, myPanel,
               "Please Enter ID and Name of Item", JOptionPane.OK_CANCEL_OPTION);
               try
               {
@@ -318,7 +314,7 @@ public class MainApp extends JFrame{
 */
            public void actionPerformed(ActionEvent e){
              JPanel panel = new JPanel();
-             JTextField idTextField = new JTextField(5);
+             new JTextField(5);
              JTextField numToDelete = new JTextField(5);
              String id = "";
              Integer quantity = 0;
@@ -331,7 +327,7 @@ public class MainApp extends JFrame{
              }
              panel.add(new JLabel("Quantity you wish to delete: "));
              panel.add(numToDelete);
-             int result = JOptionPane.showConfirmDialog(null, panel,
+             JOptionPane.showConfirmDialog(null, panel,
              "Please Enter ID and Quantity to delete", JOptionPane.OK_CANCEL_OPTION);
              try
              {
@@ -358,8 +354,9 @@ public class MainApp extends JFrame{
 *that contain the given name.
 *@param e is when the user clicks button4
 */
-           public void actionPerformed(ActionEvent e){
-             JPanel panel = new JPanel();
+           @SuppressWarnings("deprecation")
+		public void actionPerformed(ActionEvent e){
+             new JPanel();
              String name = "";
              name = JOptionPane.showInputDialog("Name of Item to search for : ");
              String str = hardwareStore.getMatchingItemsByName(name);
@@ -383,7 +380,8 @@ public class MainApp extends JFrame{
 *This method is used to show a list of all of the existing users.
 *@param e is when the user clicks button5
 */
-           public void actionPerformed(ActionEvent e){
+           @SuppressWarnings("deprecation")
+		public void actionPerformed(ActionEvent e){
            String str = hardwareStore.getAllUsersFormatted();
            JTextArea textArea = new JTextArea(str);
            JFrame frame2 = new JFrame("Displaying List of Users");
@@ -441,7 +439,7 @@ public class MainApp extends JFrame{
              String firstName = "";
              String lastName = "";
              Integer ssn = 0;
-             int result = JOptionPane.showConfirmDialog(null, myPanel,
+             JOptionPane.showConfirmDialog(null, myPanel,
              "Please Enter Employee Fields", JOptionPane.OK_CANCEL_OPTION);
              myPanel.setLayout(new FlowLayout());
              try
@@ -489,7 +487,7 @@ public class MainApp extends JFrame{
              String lastName = "";
              String phoneNumber = "";
              String address = "";
-             int result = JOptionPane.showConfirmDialog(null, myPanel,
+             JOptionPane.showConfirmDialog(null, myPanel,
              "Please Enter Customer Fields", JOptionPane.OK_CANCEL_OPTION);
              myPanel.setLayout(new FlowLayout());
              try
@@ -568,7 +566,7 @@ public class MainApp extends JFrame{
              String firstName = "";
              String lastName = "";
              Integer ssn = 0;
-             int result = JOptionPane.showConfirmDialog(null, myPanel,
+             JOptionPane.showConfirmDialog(null, myPanel,
              "Edit Employee Info", JOptionPane.OK_CANCEL_OPTION);
              myPanel.setLayout(new FlowLayout());
              try
@@ -624,7 +622,7 @@ public class MainApp extends JFrame{
              String lastName = "";
              String phoneNumber = "";
              String address = "";
-             int result = JOptionPane.showConfirmDialog(null, myPanel,
+             JOptionPane.showConfirmDialog(null, myPanel,
              "Edit Customer Info", JOptionPane.OK_CANCEL_OPTION);
              myPanel.setLayout(new FlowLayout());
              try
@@ -694,7 +692,8 @@ public class MainApp extends JFrame{
 *This method is used to show a list of all of the completed Transactions.
 *@param e is when the user clicks button9
 */
-          public void actionPerformed(ActionEvent e){
+          @SuppressWarnings("deprecation")
+		public void actionPerformed(ActionEvent e){
           String str = hardwareStore.getAllTransactionsFormatted();
           JTextArea textArea = new JTextArea(str);
           JFrame frame2 = new JFrame("Displaying List of Transactions");
