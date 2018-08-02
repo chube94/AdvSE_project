@@ -1,17 +1,5 @@
-/** 
-*
-*Setting up applicance class constructors and getters
-*
-*
-**/
+package hardwarestore;
 
-package hardwarestore.items;
-
-
-/**
- *
- * @author Junye Wen, modified by: William Hubert
- */
 public class Appliances extends Item {
     protected final String brand;
     protected final String type;
@@ -23,8 +11,7 @@ public class Appliances extends Item {
      * @param quantity
      * @param price
      * @param brand
-     * @param type a <b><CODE>String</CODE></b> that represents the type.
-     *                "Refrigerators", "Washers&Dryers", "Ranges&Ovens", "Small Appliance".
+     * @param type 
      */
     public Appliances(String idNumber, String name, int quantity, float price, String brand, String type) {
         super(idNumber, name, quantity, price);
@@ -33,7 +20,7 @@ public class Appliances extends Item {
     }
 
     /**
-     * Get the brand.
+     * returns the brand 
      * @return brand
      */
     public String getBrand() {
@@ -42,7 +29,7 @@ public class Appliances extends Item {
 
 
     /**
-     * Get the type.
+     * returns the type 
      * @return type
      */
     public String getType() {
@@ -51,7 +38,7 @@ public class Appliances extends Item {
 
 
     /**
-     * Returns the attributes of the appliance, in a formatted text fashion.
+     * Returns a formated list of the appliance's attributes 
      * @return Formatted Text.
      */
     @Override
