@@ -64,10 +64,10 @@ public class MainApp extends JFrame{
 *used in this program.
 */
      public void createFrame() throws Exception{
-        JFrame frame = new JFrame("Hardware Store");
+        JFrame mainFrame = new JFrame("Hardware Store");
         logger.info("Main Frame is created");
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+        mainFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        mainFrame.addWindowListener(new java.awt.event.WindowAdapter() {
 
 /**
 *This method is used to add a text box asking if the user really wants to exit the Program
@@ -78,28 +78,28 @@ public class MainApp extends JFrame{
 */
           @Override
           public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-          if (JOptionPane.showConfirmDialog(frame,
+          if (JOptionPane.showConfirmDialog(mainFrame,
             "Are you sure to close this window?", "Really Closing?",
             JOptionPane.YES_NO_OPTION,
             JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
               try
               {
                 saveDatabase();
-                JFrame frame2 = new JFrame("Exiting Program");
-                JLabel label2 = new JLabel("Saving database before exit...");
-                frame2.add(label2);
-                frame2.setVisible(true);
-                frame2.pack();
+                JFrame exitFrame = new JFrame("Exiting Program");
+                JLabel exitLabel = new JLabel("Saving database before exit...");
+                exitFrame.add(exitLabel);
+                exitFrame.setVisible(true);
+                exitFrame.pack();
                 logger.info("Database is saved");
               }
               catch (IOException e)
               {
                 logger.log(Level.SEVERE, e.getMessage(), e);
-                JFrame frame2 = new JFrame("Exiting Program");
-                JLabel label2 = new JLabel("Exception caught, database not saved before exit...");
-                frame2.add(label2);
-                frame2.setVisible(true);
-                frame2.pack();
+                JFrame exitFrame = new JFrame("Exiting Program");
+                JLabel exitLabel = new JLabel("Exception caught, database not saved before exit...");
+                exitFrame.add(exitLabel);
+                exitFrame.setVisible(true);
+                exitFrame.pack();
                 System.exit(0);
               }
             System.exit(0);
@@ -107,12 +107,12 @@ public class MainApp extends JFrame{
     }
 });
 
-       frame.setSize(600, 200);
-       JPanel panel = new JPanel();
-       frame.add(panel);
-       JButton button1 = new JButton("Show All Existing Items");
-       panel.add(button1);
-       button1.addActionListener(new ActionListener(){
+       mainFrame.setSize(600, 200);
+       JPanel mainPanel = new JPanel();
+       mainFrame.add(mainPanel);
+       JButton showItemsButton = new JButton("Show All Existing Items");
+       mainPanel.add(showItemsButton);
+       showItemsButton.addActionListener(new ActionListener(){
 
 /**
 *This method is used to show all of the Items in the list when the user clicks button 1
@@ -122,22 +122,22 @@ public class MainApp extends JFrame{
 		public void actionPerformed(ActionEvent e){
            HardwareStore.sortItemList();
            String str = hardwareStore.getAllItemsFormatted();
-           JTextArea textArea = new JTextArea(str);
-           JFrame frame2 = new JFrame("Displaying List of Items");
-           frame2.setSize(500, 100);
-           JApplet applet = new JApplet();
-           applet.getContentPane().add(textArea);
-           frame2.add(applet);
-           frame2.pack();
-           frame2.setLocationRelativeTo(null);
-           frame2.setVisible(true);
+           JTextArea showAllItemsTextArea = new JTextArea(str);
+           JFrame displayAllItemsFrame = new JFrame("Displaying List of Items");
+           displayAllItemsFrame.setSize(500, 100);
+           JApplet displayAllItemsApplet = new JApplet();
+           displayAllItemsApplet.getContentPane().add(showAllItemsTextArea);
+           displayAllItemsFrame.add(displayAllItemsApplet);
+           displayAllItemsFrame.pack();
+           displayAllItemsFrame.setLocationRelativeTo(null);
+           displayAllItemsFrame.setVisible(true);
            logger.info("User displays list of all Existing Items");
     }
   });
 
-       JButton button2 = new JButton("Add New Item");
-       panel.add(button2);
-       button2.addActionListener(new ActionListener(){
+       JButton addNewItemButton = new JButton("Add New Item");
+       mainPanel.add(addNewItemButton);
+       addNewItemButton.addActionListener(new ActionListener(){
 
 /**
 *This method is used to ask the User if they would like to add an Appliance or a Hardware Item
@@ -145,14 +145,14 @@ public class MainApp extends JFrame{
 @param e is when button2 is clicked
 */
             public void actionPerformed(ActionEvent e){
-              JFrame frame2 = new JFrame("Add New Item");
-              frame2.setSize(400, 400);
-              JButton button1 = new JButton("Hardware Item");
-              JButton button2 = new JButton("Appliance Item");
-              JPanel panel = new JPanel();
-              panel.add(button1);
+              JFrame addNewItemFrame = new JFrame("Add New Item");
+              addNewItemFrame.setSize(400, 400);
+              JButton hardwareItemButton = new JButton("Hardware Item");
+              JButton applianceItemButton = new JButton("Appliance Item");
+              JPanel addNewItemPanel = new JPanel();
+              addNewItemPanel.add(hardwareItemButton);
               logger.info("User chooses if they want to add an Appliance or Hardware Item");
-              button1.addActionListener(new ActionListener(){
+              hardwareItemButton.addActionListener(new ActionListener(){
 
 /**
 *This method is used to add a Hardware Item to the list.
@@ -181,29 +181,29 @@ public class MainApp extends JFrame{
                   group.add(option3);
                   group.add(option4);
                   group.add(option5);
-                  JPanel myPanel = new JPanel();
-                  myPanel.add(new JLabel("ID: "));
-                  myPanel.add(idField);
-                  myPanel.add(new JLabel("Name: "));
-                  myPanel.add(nameField);
-                  myPanel.add(new JLabel("Quantity: "));
-                  myPanel.add(quantityField);
-                  myPanel.add(new JLabel("Price: "));
-                  myPanel.add(priceField);
-                  myPanel.add(option1);
-                  myPanel.add(option2);
-                  myPanel.add(option3);
-                  myPanel.add(option4);
-                  myPanel.add(option5);
-                  myPanel.setLayout(new GridLayout(4,4));
+                  JPanel addNewHardwareItemPanel = new JPanel();
+                  addNewHardwareItemPanel.add(new JLabel("ID: "));
+                  addNewHardwareItemPanel.add(idField);
+                  addNewHardwareItemPanel.add(new JLabel("Name: "));
+                  addNewHardwareItemPanel.add(nameField);
+                  addNewHardwareItemPanel.add(new JLabel("Quantity: "));
+                  addNewHardwareItemPanel.add(quantityField);
+                  addNewHardwareItemPanel.add(new JLabel("Price: "));
+                  addNewHardwareItemPanel.add(priceField);
+                  addNewHardwareItemPanel.add(option1);
+                  addNewHardwareItemPanel.add(option2);
+                  addNewHardwareItemPanel.add(option3);
+                  addNewHardwareItemPanel.add(option4);
+                  addNewHardwareItemPanel.add(option5);
+                  addNewHardwareItemPanel.setLayout(new GridLayout(4,4));
                   String category = "";
                   String id = "";
                   String name = "";
                   Integer quantity = 0;
                   Float price = Float.parseFloat("0");
-                  JOptionPane.showConfirmDialog(null, myPanel,
+                  JOptionPane.showConfirmDialog(null, addNewHardwareItemPanel,
                   "Please Enter ID and Name of Item", JOptionPane.OK_CANCEL_OPTION);
-                  myPanel.setLayout(new FlowLayout());
+                  addNewHardwareItemPanel.setLayout(new FlowLayout());
                   try
                   {
                     category = group.getSelection().getActionCommand();
@@ -211,7 +211,7 @@ public class MainApp extends JFrame{
                     id = idField.getText().trim();
                     quantity = Integer.parseInt(quantityField.getText().trim());
                     price = Float.parseFloat(priceField.getText().trim());
-                    myPanel.setLayout(new FlowLayout());
+                    addNewHardwareItemPanel.setLayout(new FlowLayout());
                     hardwareStore.addNewSmallHardwareItem(id,  name,  quantity,  price,  category);
                     logger.info("User adds new Hardware Item");
                   }
@@ -222,8 +222,8 @@ public class MainApp extends JFrame{
                   }
                 }
               });
-          panel.add(button2);
-          button2.addActionListener(new ActionListener(){
+              addNewItemPanel.add(applianceItemButton);
+          applianceItemButton.addActionListener(new ActionListener(){
 
             /**
             *This method is used to add an Appliance Item to the list.
@@ -250,29 +250,29 @@ public class MainApp extends JFrame{
               group.add(option2);
               group.add(option3);
               group.add(option4);
-              JPanel myPanel = new JPanel();
-              myPanel.add(new JLabel("ID: "));
-              myPanel.add(idField);
-              myPanel.add(new JLabel("Name: "));
-              myPanel.add(nameField);
-              myPanel.add(new JLabel("Quantity: "));
-              myPanel.add(quantityField);
-              myPanel.add(new JLabel("Price: "));
-              myPanel.add(priceField);
-              myPanel.add(new JLabel("Brand: "));
-              myPanel.add(brandField);
-              myPanel.add(option1);
-              myPanel.add(option2);
-              myPanel.add(option3);
-              myPanel.add(option4);
-              myPanel.setLayout(new GridLayout(4, 4));
+              JPanel addNewApplianceItemPanel = new JPanel();
+              addNewApplianceItemPanel.add(new JLabel("ID: "));
+              addNewApplianceItemPanel.add(idField);
+              addNewApplianceItemPanel.add(new JLabel("Name: "));
+              addNewApplianceItemPanel.add(nameField);
+              addNewApplianceItemPanel.add(new JLabel("Quantity: "));
+              addNewApplianceItemPanel.add(quantityField);
+              addNewApplianceItemPanel.add(new JLabel("Price: "));
+              addNewApplianceItemPanel.add(priceField);
+              addNewApplianceItemPanel.add(new JLabel("Brand: "));
+              addNewApplianceItemPanel.add(brandField);
+              addNewApplianceItemPanel.add(option1);
+              addNewApplianceItemPanel.add(option2);
+              addNewApplianceItemPanel.add(option3);
+              addNewApplianceItemPanel.add(option4);
+              addNewApplianceItemPanel.setLayout(new GridLayout(4, 4));
               String brand = "";
               String type = "";
               String id = "";
               String name = "";
               Integer quantity = 0;
               Float price = Float.parseFloat("0");
-              JOptionPane.showConfirmDialog(null, myPanel,
+              JOptionPane.showConfirmDialog(null, addNewApplianceItemPanel,
               "Please Enter ID and Name of Item", JOptionPane.OK_CANCEL_OPTION);
               try
               {
@@ -282,7 +282,7 @@ public class MainApp extends JFrame{
                 id = idField.getText().trim();
                 quantity = Integer.parseInt(quantityField.getText().trim());
                 price = Float.parseFloat(priceField.getText().trim());
-                myPanel.setLayout(new FlowLayout());
+                addNewApplianceItemPanel.setLayout(new FlowLayout());
                 hardwareStore.addNewAppliance(id,  name,  quantity,  price, brand,  type);
                 logger.info("User adds new Appliance Item");
               }
@@ -293,16 +293,16 @@ public class MainApp extends JFrame{
               }
             }
           });
-          frame2.add(panel);
-          frame2.pack();
-          frame2.setLocationRelativeTo(null);
-          frame2.setVisible(true);
+          addNewItemFrame.add(addNewItemPanel);
+          addNewItemFrame.pack();
+          addNewItemFrame.setLocationRelativeTo(null);
+          addNewItemFrame.setVisible(true);
         }
       });
 
-       JButton button3 = new JButton("Delete an Item");
-       panel.add(button3);
-       button3.addActionListener(new ActionListener(){
+       JButton deleteItemButton = new JButton("Delete an Item");
+       mainPanel.add(deleteItemButton);
+       deleteItemButton.addActionListener(new ActionListener(){
 
 /**
 *This method is used to delete and Item. It first asks the user to input the ID of the item they wish
@@ -313,22 +313,20 @@ public class MainApp extends JFrame{
 *to delete.
 */
            public void actionPerformed(ActionEvent e){
-             JPanel panel = new JPanel();
-             new JTextField(5);
+             JPanel deleteItemPanel = new JPanel();
              JTextField numToDelete = new JTextField(5);
              String id = "";
              Integer quantity = 0;
              int indexToRemove = 0;
              id = JOptionPane.showInputDialog("ID of Item you wish to delete: ");
              indexToRemove = hardwareStore.findItemIndex(id);
-             while (indexToRemove == -1){
-               id = JOptionPane.showInputDialog("No Item found with given ID, try a new one: ");
-               indexToRemove = hardwareStore.findItemIndex(id);
+             if (indexToRemove == -1){
+            	 deleteItemPanel.setVisible(false);
              }
-             panel.add(new JLabel("Quantity you wish to delete: "));
-             panel.add(numToDelete);
-             JOptionPane.showConfirmDialog(null, panel,
-             "Please Enter ID and Quantity to delete", JOptionPane.OK_CANCEL_OPTION);
+             deleteItemPanel.add(new JLabel("Quantity you wish to delete: "));
+             deleteItemPanel.add(numToDelete);
+             JOptionPane.showConfirmDialog(null, deleteItemPanel,
+             "Given ID not found, please try again", JOptionPane.OK_CANCEL_OPTION);
              try
              {
                quantity = Integer.parseInt(numToDelete.getText().trim());
@@ -340,14 +338,14 @@ public class MainApp extends JFrame{
              }
              hardwareStore.removeQuantity(indexToRemove, quantity);
              logger.info("User deletes specified quantity from given Item ");
-             if( hardwareStore.findItem(id).getQuantity() == 0)
+             if( hardwareStore.findItem(id).getQuantity() < 0)
               hardwareStore.removeItem(indexToRemove);
               logger.info("User deletes Item from list");
            }});
 
-       JButton button4 = new JButton("Search for an Item");
-       panel.add(button4);
-       button4.addActionListener(new ActionListener(){
+       JButton searchItemButton = new JButton("Search for an Item");
+       mainPanel.add(searchItemButton);
+       searchItemButton.addActionListener(new ActionListener(){
 
 /**
 *This method is used to Search for an item containg a given name, and display a list of all the Items
@@ -356,25 +354,25 @@ public class MainApp extends JFrame{
 */
            @SuppressWarnings("deprecation")
 		public void actionPerformed(ActionEvent e){
-             new JPanel();
+           //  new JPanel();
              String name = "";
              name = JOptionPane.showInputDialog("Name of Item to search for : ");
              String str = hardwareStore.getMatchingItemsByName(name);
-             JTextArea textArea = new JTextArea(str);
-             JFrame frame2 = new JFrame("Displaying List of Items with Given Name");
-             frame2.setSize(500, 100);
-             JApplet applet = new JApplet();
-             applet.getContentPane().add(textArea);
-             frame2.add(applet);
-             frame2.pack();
-             frame2.setLocationRelativeTo(null);
-             frame2.setVisible(true);
+             JTextArea matchingItemsTextArea = new JTextArea(str);
+             JFrame displayItemsWithGivenNameFrame = new JFrame("Displaying List of Items with Given Name");
+             displayItemsWithGivenNameFrame.setSize(500, 100);
+             JApplet displayItemsWithGivenNameApplet = new JApplet();
+             displayItemsWithGivenNameApplet.getContentPane().add(matchingItemsTextArea);
+             displayItemsWithGivenNameFrame.add(displayItemsWithGivenNameApplet);
+             displayItemsWithGivenNameFrame.pack();
+             displayItemsWithGivenNameFrame.setLocationRelativeTo(null);
+             displayItemsWithGivenNameFrame.setVisible(true);
              logger.info("User displays list of Item's containing the given name");
         }});
 
-       JButton button5 = new JButton("Show list of Users");
-       panel.add(button5);
-       button5.addActionListener(new ActionListener(){
+       JButton showUsersButton = new JButton("Show list of Users");
+       mainPanel.add(showUsersButton);
+       showUsersButton.addActionListener(new ActionListener(){
 
 /**
 *This method is used to show a list of all of the existing users.
@@ -383,22 +381,22 @@ public class MainApp extends JFrame{
            @SuppressWarnings("deprecation")
 		public void actionPerformed(ActionEvent e){
            String str = hardwareStore.getAllUsersFormatted();
-           JTextArea textArea = new JTextArea(str);
-           JFrame frame2 = new JFrame("Displaying List of Users");
-           frame2.setSize(500, 100);
-           JApplet applet = new JApplet();
-           applet.getContentPane().add(textArea);
-           frame2.add(applet);
-           frame2.pack();
-           frame2.setLocationRelativeTo(null);
-           frame2.setVisible(true);
+           JTextArea showUsersTextArea = new JTextArea(str);
+           JFrame showUsersFrame = new JFrame("Displaying List of Users");
+           showUsersFrame.setSize(500, 100);
+           JApplet showUsersApplet = new JApplet();
+           showUsersApplet.getContentPane().add(showUsersTextArea);
+           showUsersFrame.add(showUsersApplet);
+           showUsersFrame.pack();
+           showUsersFrame.setLocationRelativeTo(null);
+           showUsersFrame.setVisible(true);
            logger.info("User displays list of Users ");
     }
   });
 
-       JButton button6 = new JButton("Add new User");
-       panel.add(button6);
-       button6.addActionListener(new ActionListener(){
+       JButton addNewUserButton = new JButton("Add new User");
+       mainPanel.add(addNewUserButton);
+       addNewUserButton.addActionListener(new ActionListener(){
 
 /**
 *This method is used to ask the user if they would like to add a Customer or Employee when they
@@ -406,14 +404,14 @@ public class MainApp extends JFrame{
 *@param e is when button 6 is clicked
 */
        public void actionPerformed(ActionEvent e){
-         JFrame frame2 = new JFrame("Add New User");
-         frame2.setSize(400, 400);
-         JButton button1 = new JButton("Employee");
-         JButton button2 = new JButton("Customer");
-         JPanel panel = new JPanel();
+         JFrame addNewUserFrame = new JFrame("Add New User");
+         addNewUserFrame.setSize(400, 400);
+         JButton employeeButton = new JButton("Employee");
+         JButton customerButton = new JButton("Customer");
+         JPanel addNewUserPanel = new JPanel();
          logger.info("User decides if they want to add a Customer or an Employee");
-         panel.add(button1);
-         button1.addActionListener(new ActionListener(){
+         addNewUserPanel.add(employeeButton);
+         employeeButton.addActionListener(new ActionListener(){
 
 /**
 *This method is used to add a new Employee to the list.
@@ -426,29 +424,29 @@ public class MainApp extends JFrame{
              JTextField lastNameField = new JTextField(10);
              JTextField ssnField = new JTextField(9);
              JTextField salaryField = new JTextField(5);
-             JPanel myPanel = new JPanel();
-             myPanel.add(new JLabel("First Name: "));
-             myPanel.add(firstNameField);
-             myPanel.add(new JLabel("Last Name: "));
-             myPanel.add(lastNameField);
-             myPanel.add(new JLabel("Social Security Number: "));
-             myPanel.add(ssnField);
-             myPanel.add(new JLabel("Monthly Salary: "));
-             myPanel.add(salaryField);
-             myPanel.setLayout(new GridLayout(4,4));
+             JPanel addEmployeePanel = new JPanel();
+             addEmployeePanel.add(new JLabel("First Name: "));
+             addEmployeePanel.add(firstNameField);
+             addEmployeePanel.add(new JLabel("Last Name: "));
+             addEmployeePanel.add(lastNameField);
+             addEmployeePanel.add(new JLabel("Social Security Number: "));
+             addEmployeePanel.add(ssnField);
+             addEmployeePanel.add(new JLabel("Monthly Salary: "));
+             addEmployeePanel.add(salaryField);
+             addEmployeePanel.setLayout(new GridLayout(4,4));
              String firstName = "";
              String lastName = "";
              Integer ssn = 0;
-             JOptionPane.showConfirmDialog(null, myPanel,
+             JOptionPane.showConfirmDialog(null, addEmployeePanel,
              "Please Enter Employee Fields", JOptionPane.OK_CANCEL_OPTION);
-             myPanel.setLayout(new FlowLayout());
+             addEmployeePanel.setLayout(new FlowLayout());
              try
              {
                firstName = firstNameField.getText().trim();
                lastName = lastNameField.getText().trim();
                ssn = Integer.parseInt(ssnField.getText().trim());
                Float salary = Float.parseFloat(salaryField.getText().trim());
-               myPanel.setLayout(new FlowLayout());
+               addEmployeePanel.setLayout(new FlowLayout());
                hardwareStore.addEmployee(firstName,  lastName,  ssn,  salary);
                logger.info("User adds new Employee");
              }
@@ -460,8 +458,8 @@ public class MainApp extends JFrame{
            }
          });
 
-         panel.add(button2);
-         button2.addActionListener(new ActionListener(){
+         addNewUserPanel.add(customerButton);
+         customerButton.addActionListener(new ActionListener(){
 
            /**
            *This method is used to add a new Customer to the list.
@@ -473,30 +471,30 @@ public class MainApp extends JFrame{
              JTextField lastNameField = new JTextField(10);
              JTextField phoneNumberField = new JTextField(10);
              JTextField addressField = new JTextField(12);
-             JPanel myPanel = new JPanel();
-             myPanel.add(new JLabel("First Name: "));
-             myPanel.add(firstNameField);
-             myPanel.add(new JLabel("Last Name: "));
-             myPanel.add(lastNameField);
-             myPanel.add(new JLabel("Phone Number: "));
-             myPanel.add(phoneNumberField);
-             myPanel.add(new JLabel("Address: "));
-             myPanel.add(addressField);
-             myPanel.setLayout(new GridLayout(4,4));
+             JPanel addCustomerPanel = new JPanel();
+             addCustomerPanel.add(new JLabel("First Name: "));
+             addCustomerPanel.add(firstNameField);
+             addCustomerPanel.add(new JLabel("Last Name: "));
+             addCustomerPanel.add(lastNameField);
+             addCustomerPanel.add(new JLabel("Phone Number: "));
+             addCustomerPanel.add(phoneNumberField);
+             addCustomerPanel.add(new JLabel("Address: "));
+             addCustomerPanel.add(addressField);
+             addCustomerPanel.setLayout(new GridLayout(4,4));
              String firstName = "";
              String lastName = "";
              String phoneNumber = "";
              String address = "";
-             JOptionPane.showConfirmDialog(null, myPanel,
+             JOptionPane.showConfirmDialog(null, addCustomerPanel,
              "Please Enter Customer Fields", JOptionPane.OK_CANCEL_OPTION);
-             myPanel.setLayout(new FlowLayout());
+             addCustomerPanel.setLayout(new FlowLayout());
              try
              {
                firstName = firstNameField.getText().trim();
                lastName = lastNameField.getText().trim();
                phoneNumber = phoneNumberField.getText().trim();
                address = addressField.getText().trim();
-               myPanel.setLayout(new FlowLayout());
+               addCustomerPanel.setLayout(new FlowLayout());
                hardwareStore.addCustomer(firstName,  lastName,  phoneNumber,  address);
                logger.info("User adds new Customer");
              }
@@ -507,17 +505,17 @@ public class MainApp extends JFrame{
              }
            }
          });
-         frame2.add(panel);
-         frame2.pack();
-         frame2.setLocationRelativeTo(null);
-         frame2.setVisible(true);
+         addNewUserFrame.add(addNewUserPanel);
+         addNewUserFrame.pack();
+         addNewUserFrame.setLocationRelativeTo(null);
+         addNewUserFrame.setVisible(true);
 
        }
      });
 
-       JButton button7 = new JButton("Update User Info");
-       panel.add(button7);
-       button7.addActionListener(new ActionListener(){
+       JButton updateUserInfoButton = new JButton("Update User Info");
+       mainPanel.add(updateUserInfoButton);
+       updateUserInfoButton.addActionListener(new ActionListener(){
 
 /**
 *This method is used to ask if the user would like to update customer or employee info when they
@@ -525,14 +523,14 @@ public class MainApp extends JFrame{
 *@param e is when the user clikcs button7
 */
        public void actionPerformed(ActionEvent e){
-         JFrame frame2 = new JFrame("Update User Info");
-         frame2.setSize(400, 400);
-         JButton button1 = new JButton("Employee");
-         JButton button2 = new JButton("Customer");
-         JPanel panel = new JPanel();
-         panel.add(button1);
+         JFrame updateUserInfoFrame = new JFrame("Update User Info");
+         updateUserInfoFrame.setSize(400, 400);
+         JButton employeeButton = new JButton("Employee");
+         JButton customerButton = new JButton("Customer");
+         JPanel updateUserInfoPanel = new JPanel();
+         updateUserInfoPanel.add(employeeButton);
          logger.info("User decides if they want to edit Customer or Employee info");
-         button1.addActionListener(new ActionListener(){
+         employeeButton.addActionListener(new ActionListener(){
 
 /**
 *This method is used to update an Employee's Info. It first checks that the input ID exists, and then
@@ -553,29 +551,29 @@ public class MainApp extends JFrame{
              JTextField lastNameField = new JTextField(10);
              JTextField ssnField = new JTextField(9);
              JTextField salaryField = new JTextField(5);
-             JPanel myPanel = new JPanel();
-             myPanel.add(new JLabel("First Name: "));
-             myPanel.add(firstNameField);
-             myPanel.add(new JLabel("Last Name: "));
-             myPanel.add(lastNameField);
-             myPanel.add(new JLabel("Social Security Number: "));
-             myPanel.add(ssnField);
-             myPanel.add(new JLabel("Monthly Salary: "));
-             myPanel.add(salaryField);
-             myPanel.setLayout(new GridLayout(4,4));
+             JPanel updateEmployeePanel = new JPanel();
+             updateEmployeePanel.add(new JLabel("First Name: "));
+             updateEmployeePanel.add(firstNameField);
+             updateEmployeePanel.add(new JLabel("Last Name: "));
+             updateEmployeePanel.add(lastNameField);
+             updateEmployeePanel.add(new JLabel("Social Security Number: "));
+             updateEmployeePanel.add(ssnField);
+             updateEmployeePanel.add(new JLabel("Monthly Salary: "));
+             updateEmployeePanel.add(salaryField);
+             updateEmployeePanel.setLayout(new GridLayout(4,4));
              String firstName = "";
              String lastName = "";
              Integer ssn = 0;
-             JOptionPane.showConfirmDialog(null, myPanel,
+             JOptionPane.showConfirmDialog(null, updateEmployeePanel,
              "Edit Employee Info", JOptionPane.OK_CANCEL_OPTION);
-             myPanel.setLayout(new FlowLayout());
+             updateEmployeePanel.setLayout(new FlowLayout());
              try
              {
                firstName = firstNameField.getText().trim();
                lastName = lastNameField.getText().trim();
                ssn = Integer.parseInt(ssnField.getText().trim());
                Float salary = Float.parseFloat(salaryField.getText().trim());
-               myPanel.setLayout(new FlowLayout());
+               updateEmployeePanel.setLayout(new FlowLayout());
                hardwareStore.editEmployeeInformation(id, firstName,  lastName,  ssn,  salary);
                logger.info("User Updates Employee Info");
              }
@@ -587,8 +585,8 @@ public class MainApp extends JFrame{
            }
          });
 
-         panel.add(button2);
-         button2.addActionListener(new ActionListener(){
+         updateUserInfoPanel.add(customerButton);
+         customerButton.addActionListener(new ActionListener(){
 
  /**
 *This method is used to update an Customer's Info. It first checks that the input ID exists, and then
@@ -608,30 +606,30 @@ public class MainApp extends JFrame{
              JTextField lastNameField = new JTextField(10);
              JTextField phoneNumberField = new JTextField(10);
              JTextField addressField = new JTextField(12);
-             JPanel myPanel = new JPanel();
-             myPanel.add(new JLabel("First Name: "));
-             myPanel.add(firstNameField);
-             myPanel.add(new JLabel("Last Name: "));
-             myPanel.add(lastNameField);
-             myPanel.add(new JLabel("Phone Number: "));
-             myPanel.add(phoneNumberField);
-             myPanel.add(new JLabel("Address: "));
-             myPanel.add(addressField);
-             myPanel.setLayout(new GridLayout(4,4));
+             JPanel updateCustomerPanel = new JPanel();
+             updateCustomerPanel.add(new JLabel("First Name: "));
+             updateCustomerPanel.add(firstNameField);
+             updateCustomerPanel.add(new JLabel("Last Name: "));
+             updateCustomerPanel.add(lastNameField);
+             updateCustomerPanel.add(new JLabel("Phone Number: "));
+             updateCustomerPanel.add(phoneNumberField);
+             updateCustomerPanel.add(new JLabel("Address: "));
+             updateCustomerPanel.add(addressField);
+             updateCustomerPanel.setLayout(new GridLayout(4,4));
              String firstName = "";
              String lastName = "";
              String phoneNumber = "";
              String address = "";
-             JOptionPane.showConfirmDialog(null, myPanel,
+             JOptionPane.showConfirmDialog(null, updateCustomerPanel,
              "Edit Customer Info", JOptionPane.OK_CANCEL_OPTION);
-             myPanel.setLayout(new FlowLayout());
+             updateCustomerPanel.setLayout(new FlowLayout());
              try
              {
                firstName = firstNameField.getText().trim();
                lastName = lastNameField.getText().trim();
                phoneNumber = phoneNumberField.getText().trim();
                address = addressField.getText().trim();
-               myPanel.setLayout(new FlowLayout());
+               updateCustomerPanel.setLayout(new FlowLayout());
                hardwareStore.editCustomerInformation(id, firstName,  lastName,  phoneNumber,  address);
                logger.info("User Updates Customer Info");
              }
@@ -642,16 +640,16 @@ public class MainApp extends JFrame{
              }
            }
          });
-         frame2.add(panel);
-         frame2.pack();
-         frame2.setLocationRelativeTo(null);
-         frame2.setVisible(true);
+         updateUserInfoFrame.add(updateUserInfoPanel);
+         updateUserInfoFrame.pack();
+         updateUserInfoFrame.setLocationRelativeTo(null);
+         updateUserInfoFrame.setVisible(true);
        }
      });
 
-       JButton button8 = new JButton("Complete Sale Transaction");
-       panel.add(button8);
-       button8.addActionListener(new ActionListener(){
+       JButton completeTransactionButton = new JButton("Complete Sale Transaction");
+       mainPanel.add(completeTransactionButton);
+       completeTransactionButton.addActionListener(new ActionListener(){
 
 /**
 *This method is used to complete a sale Transaction.
@@ -681,12 +679,16 @@ public class MainApp extends JFrame{
            quantitySold = Integer.parseInt(JOptionPane.showInputDialog("Quantity Sold Must be a Positive Integer : "));
          }
          hardwareStore.progressTransaction(itemID, quantitySold, customerID, employeeID, itemIndex);
+         if( hardwareStore.findItem(itemID).getQuantity() < 0) {
+        	 int indexToRemove = hardwareStore.findItemIndex(itemID);
+             hardwareStore.removeItem(indexToRemove);
+         }
          logger.info("User Completes a Transaction");
        }});
 
-       JButton button9 = new JButton("Show List of Transactions");
-       panel.add(button9);
-      button9.addActionListener(new ActionListener(){
+       JButton showTransactionsButton = new JButton("Show List of Transactions");
+       mainPanel.add(showTransactionsButton);
+       showTransactionsButton.addActionListener(new ActionListener(){
 
 /**
 *This method is used to show a list of all of the completed Transactions.
@@ -695,20 +697,20 @@ public class MainApp extends JFrame{
           @SuppressWarnings("deprecation")
 		public void actionPerformed(ActionEvent e){
           String str = hardwareStore.getAllTransactionsFormatted();
-          JTextArea textArea = new JTextArea(str);
-          JFrame frame2 = new JFrame("Displaying List of Transactions");
-          frame2.setSize(500, 100);
+          JTextArea showTransactionsTextArea = new JTextArea(str);
+          JFrame showTransactionsFrame = new JFrame("Displaying List of Transactions");
+          showTransactionsFrame.setSize(500, 100);
           JApplet applet = new JApplet();
-          applet.getContentPane().add(textArea);
-          frame2.add(applet);
-          frame2.pack();
-          frame2.setLocationRelativeTo(null);
-          frame2.setVisible(true);
+          applet.getContentPane().add(showTransactionsTextArea);
+          showTransactionsFrame.add(applet);
+          showTransactionsFrame.pack();
+          showTransactionsFrame.setLocationRelativeTo(null);
+          showTransactionsFrame.setVisible(true);
           logger.info("User shows list of all Completed Transactions");
    }
  });
- frame.setLocationRelativeTo(null);
- frame.setVisible(true);
+ mainFrame.setLocationRelativeTo(null);
+ mainFrame.setVisible(true);
 }
 
 /**
