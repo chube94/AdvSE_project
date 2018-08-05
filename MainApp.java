@@ -107,7 +107,7 @@ public class MainApp extends JFrame{
     }
 });
 
-       mainFrame.setSize(600, 200);
+       mainFrame.setSize(500, 200);
        JPanel mainPanel = new JPanel();
        mainFrame.add(mainPanel);
        JButton showItemsButton = new JButton("Show All Existing Items");
@@ -135,6 +135,72 @@ public class MainApp extends JFrame{
     }
   });
 
+       JButton addQuantityToExistingItem = new JButton("Add quantity to existing Item");
+       mainPanel.add(addQuantityToExistingItem);
+       addQuantityToExistingItem.addActionListener(new ActionListener(){
+    	   
+           public void actionPerformed(ActionEvent e){
+        	   HardwareStore.sortItemList();
+        	   //JFrame addQuantityToExistingItemFrame = new JFrame("Adding quantity to existing Item");
+               JPanel addQuantityToItemPanel = new JPanel();
+               JTextField numToAdd = new JTextField(5);
+               String id = "";
+               Integer quantity = 0;
+               int indexToAddTo = 0;
+               id = JOptionPane.showInputDialog("ID of Item you wish to add quantity to: ");
+               indexToAddTo = hardwareStore.findItemIndex(id);
+               if (indexToAddTo == -1){
+            	   addQuantityToItemPanel.setVisible(false);
+               }
+               addQuantityToItemPanel.add(new JLabel("Quantity you wish to add: "));
+               addQuantityToItemPanel.add(numToAdd);
+               JOptionPane.showConfirmDialog(null, addQuantityToItemPanel,
+               "Given ID not found, please try again", JOptionPane.OK_CANCEL_OPTION);
+               try
+               {
+                 quantity = Integer.parseInt(numToAdd.getText().trim());
+               }
+               catch (NumberFormatException ex)
+               {
+//                 logger.log(Level.SEVERE, ex.getMessage(), ex);
+                 System.out.println("Could not delete Item");
+               }
+               hardwareStore.addQuantity(indexToAddTo, quantity);
+               logger.info("User deletes specified quantity from given Item ");
+
+                logger.info("User deletes Item from list");
+           }
+       });
+       
+       JButton searchForItemsBelowGivenQuantitiyButton = new JButton("Search for Items belows given quantity");
+       mainPanel.add(searchForItemsBelowGivenQuantitiyButton);
+       searchForItemsBelowGivenQuantitiyButton.addActionListener(new ActionListener() {
+
+    			@SuppressWarnings("deprecation")
+				public void actionPerformed(ActionEvent e){
+    		             String num = JOptionPane.showInputDialog("Name of Item to search for : ");
+    		             try {
+    		            	 int number = Integer.parseInt(num);
+    		            	 String str = hardwareStore.getMatchingItemsByQuantity(number);
+    		            	 JTextArea matchingItemsTextArea = new JTextArea(str);
+    		            	 JFrame displayItemsBelowGivenQuantityFrame = new JFrame("Displaying List of Items Below Given Quantity");
+    		            	 displayItemsBelowGivenQuantityFrame.setSize(500, 100);
+    		            	 JApplet displayItemsBelowGivenQuantityApplet = new JApplet();
+    		            	 displayItemsBelowGivenQuantityApplet.getContentPane().add(matchingItemsTextArea);
+    		            	 displayItemsBelowGivenQuantityFrame.add(displayItemsBelowGivenQuantityApplet);
+    		            	 displayItemsBelowGivenQuantityFrame.pack();
+    		            	 displayItemsBelowGivenQuantityFrame.setLocationRelativeTo(null);
+    		            	 displayItemsBelowGivenQuantityFrame.setVisible(true);
+    		            	 logger.info("User displays list of Item's below the given quantity");
+    		             }
+    		             catch(Exception ex) {
+    		            	 System.out.println(ex);
+    		             }    		   
+    		   
+    	   }
+       });
+       
+       
        JButton addNewItemButton = new JButton("Add New Item");
        mainPanel.add(addNewItemButton);
        addNewItemButton.addActionListener(new ActionListener(){
