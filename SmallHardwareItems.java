@@ -1,7 +1,11 @@
 package hardwarestore;
 
 public class SmallHardwareItems extends Item {
-    protected final String category;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected final String category;
 
     /**
      * initializes a customer object with the provided values
