@@ -66,16 +66,16 @@ public class HardwareStoreTest {
 	@Test
 	public void shouldAddNewEmployee(){
 		hardwareStore.addEmployee("Warren", "Hubert", 627534008, (float)1199.99);
-		User userAdded = hardwareStore.findUser(1);
+		User userAdded = hardwareStore.findUser(2);
 		//first user ID should be 1
-		User expectedUser = hardwareStore.getUser(0);
+		User expectedUser = hardwareStore.getUser(1);
 		assertEquals("addNewCustomer test has failed...", userAdded, expectedUser);
 	}
 	
 	@Test
 	public void shouldAddNewHardwareItem() throws IOException {
 		hardwareStore.addNewSmallHardwareItem("wch45", "Doorknob 3in", 44, (float)19.95, "Other");
-		Item itemAdded = hardwareStore.getItem(0);
+		Item itemAdded = hardwareStore.getItem(1);
 		Item expectedItem = hardwareStore.findItem("wch45");
 		assertEquals("addNewSmallHardwareItem test has failed...", expectedItem, itemAdded);
 	}
@@ -85,7 +85,7 @@ public class HardwareStoreTest {
 	public void shouldFindItemIndex() {
 		hardwareStore.addNewSmallHardwareItem("wch45", "Doorknob 3in", 44, (float)19.95, "Other");
 		int itemToBeFound = hardwareStore.findItemIndex("wch45");
-		assertEquals("findItem test has failed...", itemToBeFound, 0);
+		assertEquals("findItem test has failed...", itemToBeFound, 1);
 	}
 	
 	@Test
@@ -105,11 +105,11 @@ public class HardwareStoreTest {
 	public void shouldAddGivenQuantity() {
 		int givenQuantity = 5;
 		hardwareStore.addNewSmallHardwareItem("wch45", "Doorknob 3in", 44, (float)19.95, "Other");
-		hardwareStore.addQuantity(0, givenQuantity);
-		Item item = hardwareStore.getItem(0);
+		hardwareStore.addQuantity(1, givenQuantity);
+		Item item = hardwareStore.getItem(1);
 		int newQuantity = item.getQuantity();
 		assertEquals("addQuantity test has failed...", newQuantity, 49);
-		hardwareStore.addQuantity(0, givenQuantity);
+		hardwareStore.addQuantity(1, givenQuantity);
 		newQuantity = item.getQuantity();
 		assertEquals("addQuantity test has failed...", newQuantity, 54);		
 	}
@@ -118,11 +118,11 @@ public class HardwareStoreTest {
 	public void shouldRemoveGivenQuantity() {
 		int givenQuantity = 5;
 		hardwareStore.addNewSmallHardwareItem("wch45", "Doorknob 3in", 44, (float)19.95, "Other");
-		hardwareStore.removeQuantity(0, givenQuantity);
-		Item item = hardwareStore.getItem(0);
+		hardwareStore.removeQuantity(1, givenQuantity);
+		Item item = hardwareStore.getItem(1);
 		int newQuantity = item.getQuantity();
 		assertEquals("addQuantity test has failed...", newQuantity, 39);
-		hardwareStore.removeQuantity(0, givenQuantity);
+		hardwareStore.removeQuantity(1, givenQuantity);
 		newQuantity = item.getQuantity();
 		assertEquals("addQuantity test has failed...", newQuantity, 34);		
 	}
