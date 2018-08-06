@@ -4,6 +4,8 @@ import java.util.logging.*;
 import java.awt.*;
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -18,7 +20,7 @@ import java.io.IOException;
  * @author William Hubert
  * @version 7-30-18
  */
-public class MainApp extends JFrame{
+public class MainApp extends JFrame implements ItemListener{
 
 	/**
 	 * 
@@ -30,6 +32,14 @@ public class MainApp extends JFrame{
 	private static FileHandler fh = null;
     // This object will allow us to interact with the methods of the class HardwareStore
     private HardwareStore hardwareStore;
+    
+    JPanel cards;
+    
+    public void itemStateChanged(ItemEvent evt) {
+        CardLayout cl = (CardLayout)(cards.getLayout());
+        cl.show(cards, (String)evt.getItem());
+    }
+    
     /**
      * Default constructor. Initializes a new object of type HardwareStore and
      *adds the FileHandler fh to the logging object
@@ -108,18 +118,23 @@ public class MainApp extends JFrame{
 });
 
        mainFrame.setSize(500, 200);
+       
+       JPanel card1 = new JPanel();
+       card1.setLayout(new GridLayout(3, 3));
+       JPanel card2 = new JPanel();
+       JPanel card3 = new JPanel();
+
+       
        JPanel mainPanel = new JPanel();
        mainFrame.add(mainPanel);
        JButton showItemsButton = new JButton("Show All Existing Items");
-       mainPanel.add(showItemsButton);
        showItemsButton.addActionListener(new ActionListener(){
 
 /**
 *This method is used to show all of the Items in the list when the user clicks button 1
 *@param e is the action of the user clicking button1
 */
-           @SuppressWarnings("deprecation")
-		public void actionPerformed(ActionEvent e){
+           public void actionPerformed(ActionEvent e){
            HardwareStore.sortItemList();
            String str = hardwareStore.getAllItemsFormatted();
            JTextArea showAllItemsTextArea = new JTextArea(str);
@@ -136,12 +151,10 @@ public class MainApp extends JFrame{
   });
 
        JButton addQuantityToExistingItem = new JButton("Add quantity to existing Item");
-       mainPanel.add(addQuantityToExistingItem);
        addQuantityToExistingItem.addActionListener(new ActionListener(){
     	   
            public void actionPerformed(ActionEvent e){
         	   HardwareStore.sortItemList();
-        	   //JFrame addQuantityToExistingItemFrame = new JFrame("Adding quantity to existing Item");
                JPanel addQuantityToItemPanel = new JPanel();
                JTextField numToAdd = new JTextField(5);
                String id = "";
@@ -162,7 +175,7 @@ public class MainApp extends JFrame{
                }
                catch (NumberFormatException ex)
                {
-//                 logger.log(Level.SEVERE, ex.getMessage(), ex);
+                 logger.log(Level.SEVERE, ex.getMessage(), ex);
                  System.out.println("Could not delete Item");
                }
                hardwareStore.addQuantity(indexToAddTo, quantity);
@@ -173,11 +186,9 @@ public class MainApp extends JFrame{
        });
        
        JButton searchForItemsBelowGivenQuantitiyButton = new JButton("Search for Items belows given quantity");
-       mainPanel.add(searchForItemsBelowGivenQuantitiyButton);
        searchForItemsBelowGivenQuantitiyButton.addActionListener(new ActionListener() {
 
-    			@SuppressWarnings("deprecation")
-				public void actionPerformed(ActionEvent e){
+    			public void actionPerformed(ActionEvent e){
     		             String num = JOptionPane.showInputDialog("Name of Item to search for : ");
     		             try {
     		            	 int number = Integer.parseInt(num);
@@ -202,7 +213,6 @@ public class MainApp extends JFrame{
        
        
        JButton addNewItemButton = new JButton("Add New Item");
-       mainPanel.add(addNewItemButton);
        addNewItemButton.addActionListener(new ActionListener(){
 
 /**
@@ -367,7 +377,6 @@ public class MainApp extends JFrame{
       });
 
        JButton deleteItemButton = new JButton("Delete an Item");
-       mainPanel.add(deleteItemButton);
        deleteItemButton.addActionListener(new ActionListener(){
 
 /**
@@ -410,7 +419,6 @@ public class MainApp extends JFrame{
            }});
 
        JButton searchItemButton = new JButton("Search for an Item");
-       mainPanel.add(searchItemButton);
        searchItemButton.addActionListener(new ActionListener(){
 
 /**
@@ -418,9 +426,7 @@ public class MainApp extends JFrame{
 *that contain the given name.
 *@param e is when the user clicks button4
 */
-           @SuppressWarnings("deprecation")
-		public void actionPerformed(ActionEvent e){
-           //  new JPanel();
+           public void actionPerformed(ActionEvent e){
              String name = "";
              name = JOptionPane.showInputDialog("Name of Item to search for : ");
              String str = hardwareStore.getMatchingItemsByName(name);
@@ -437,15 +443,13 @@ public class MainApp extends JFrame{
         }});
 
        JButton showUsersButton = new JButton("Show list of Users");
-       mainPanel.add(showUsersButton);
        showUsersButton.addActionListener(new ActionListener(){
 
 /**
 *This method is used to show a list of all of the existing users.
 *@param e is when the user clicks button5
 */
-           @SuppressWarnings("deprecation")
-		public void actionPerformed(ActionEvent e){
+           public void actionPerformed(ActionEvent e){
            String str = hardwareStore.getAllUsersFormatted();
            JTextArea showUsersTextArea = new JTextArea(str);
            JFrame showUsersFrame = new JFrame("Displaying List of Users");
@@ -461,7 +465,6 @@ public class MainApp extends JFrame{
   });
 
        JButton addNewUserButton = new JButton("Add new User");
-       mainPanel.add(addNewUserButton);
        addNewUserButton.addActionListener(new ActionListener(){
 
 /**
@@ -580,7 +583,6 @@ public class MainApp extends JFrame{
      });
 
        JButton updateUserInfoButton = new JButton("Update User Info");
-       mainPanel.add(updateUserInfoButton);
        updateUserInfoButton.addActionListener(new ActionListener(){
 
 /**
@@ -714,7 +716,6 @@ public class MainApp extends JFrame{
      });
 
        JButton completeTransactionButton = new JButton("Complete Sale Transaction");
-       mainPanel.add(completeTransactionButton);
        completeTransactionButton.addActionListener(new ActionListener(){
 
 /**
@@ -727,25 +728,29 @@ public class MainApp extends JFrame{
          while(itemIndex == -1){
            itemID = JOptionPane.showInputDialog("ID not found, enter a new ID : ");
            itemIndex = hardwareStore.findItemIndex(itemID);
+           break;
          }
          int customerID = Integer.parseInt(JOptionPane.showInputDialog("ID of Customer : "));
          int customerIndex = hardwareStore.findUserIndex(customerID);
          while(customerIndex == -1){
            customerID = Integer.parseInt(JOptionPane.showInputDialog("ID not found, enter a new ID : "));
            customerIndex = hardwareStore.findUserIndex(customerID);
+           break;
          }
          int employeeID = Integer.parseInt(JOptionPane.showInputDialog("ID of Employee : "));
          int employeeIndex = hardwareStore.findUserIndex(employeeID);
          while(employeeIndex == -1){
            employeeID = Integer.parseInt(JOptionPane.showInputDialog("ID not found, enter a new ID : "));
            employeeIndex = hardwareStore.findUserIndex(employeeID);
+           break;
          }
          int quantitySold = Integer.parseInt(JOptionPane.showInputDialog("Quantity of Items Sold : "));
          while(quantitySold < 0){
            quantitySold = Integer.parseInt(JOptionPane.showInputDialog("Quantity Sold Must be a Positive Integer : "));
+           break;
          }
          hardwareStore.progressTransaction(itemID, quantitySold, customerID, employeeID, itemIndex);
-         if( hardwareStore.findItem(itemID).getQuantity() < 0) {
+         if( hardwareStore.findItem(itemID).getQuantity() < 1) {
         	 int indexToRemove = hardwareStore.findItemIndex(itemID);
              hardwareStore.removeItem(indexToRemove);
          }
@@ -753,15 +758,13 @@ public class MainApp extends JFrame{
        }});
 
        JButton showTransactionsButton = new JButton("Show List of Transactions");
-       mainPanel.add(showTransactionsButton);
        showTransactionsButton.addActionListener(new ActionListener(){
 
 /**
 *This method is used to show a list of all of the completed Transactions.
 *@param e is when the user clicks button9
 */
-          @SuppressWarnings("deprecation")
-		public void actionPerformed(ActionEvent e){
+          public void actionPerformed(ActionEvent e){
           String str = hardwareStore.getAllTransactionsFormatted();
           JTextArea showTransactionsTextArea = new JTextArea(str);
           JFrame showTransactionsFrame = new JFrame("Displaying List of Transactions");
@@ -775,8 +778,42 @@ public class MainApp extends JFrame{
           logger.info("User shows list of all Completed Transactions");
    }
  });
- mainFrame.setLocationRelativeTo(null);
- mainFrame.setVisible(true);
+       
+       card1.add(showItemsButton);
+       card1.add(addNewItemButton);
+       card1.add(addQuantityToExistingItem);
+       card1.add(deleteItemButton);
+       card1.add(searchItemButton);
+       card1.add(searchForItemsBelowGivenQuantitiyButton);
+       
+       card2.add(showUsersButton);
+       card2.add(addNewUserButton);
+       card2.add(updateUserInfoButton);
+       
+       card3.add(showTransactionsButton);
+       card3.add(completeTransactionButton);
+       
+       cards = new JPanel(new CardLayout());
+       
+       cards.add(card1, "Items Panel");
+       cards.add(card2, "Users Panel");
+       cards.add(card3, "Transactions Panel");
+       
+       JPanel comboBoxPane = new JPanel();
+       String comboBoxItems[] = {"Items Panel", "Users Panel", "Transactions Panel"};
+       @SuppressWarnings({ "rawtypes", "unchecked" })
+	JComboBox cb = new JComboBox(comboBoxItems);
+       cb.setEditable(false);
+       cb.addItemListener(this);
+       comboBoxPane.add(cb);
+       
+       mainPanel.add(comboBoxPane, BorderLayout.PAGE_START);
+       mainPanel.add(cards, BorderLayout.CENTER);
+       
+       
+       
+       mainFrame.setLocationRelativeTo(null);
+       mainFrame.setVisible(true);
 }
 
 /**
