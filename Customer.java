@@ -1,7 +1,11 @@
 package hardwarestore;
 
 public class Customer extends User {
-    private String phoneNumber;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String phoneNumber;
     private String address;
 
     /**
