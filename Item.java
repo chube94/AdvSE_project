@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 public abstract class Item implements Serializable {
 
-    protected final String idNumber;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected final String idNumber;
     protected final String name;
     protected int quantity;
     protected final float price;
