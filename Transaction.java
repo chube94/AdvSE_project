@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Transaction implements Serializable {
-    private final String itemID;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final String itemID;
     private final Date saleDate;
     private final int saleQuantity;
     private final int customerId;
