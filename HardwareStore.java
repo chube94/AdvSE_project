@@ -1,4 +1,3 @@
-
 package hardwarestore;
 
 import java.io.*;
@@ -15,7 +14,7 @@ public class HardwareStore {
     private static ArrayList<Transaction> transactionList;
     private static int userIdCounter;
 
-    private static final String DATA_FILE_NAME = "database.txt";
+    private static final String DATA_FILE_NAME = "database.ser";
 
     /**
      * @throws IOException
@@ -445,7 +444,8 @@ public class HardwareStore {
      *
      * @throws IOException
      */
-    public void readDatabase() throws IOException {
+    @SuppressWarnings("unchecked")
+	public void readDatabase() throws IOException {
 
         System.out.print("Reading database...");
 
@@ -480,7 +480,7 @@ public class HardwareStore {
         } catch (IOException ex) {
             System.err.println(ex.toString());
         } finally {
-            close(file);
+        	close(file);
         }
         System.out.println("Done.");
     }
