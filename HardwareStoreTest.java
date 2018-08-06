@@ -1,4 +1,3 @@
-
 package hardwarestore;
 
 import java.io.IOException;
