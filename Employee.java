@@ -1,7 +1,11 @@
 package hardwarestore;
 
 public class Employee extends User {
-    private int socialSecurityNumber;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int socialSecurityNumber;
     private float monthlySalary;
 
     /**
