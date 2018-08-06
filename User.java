@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 public abstract class User implements Serializable {
 
-    protected final int id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected final int id;
     protected String firstName;
     protected String lastName;
     public final boolean isEmployee;
@@ -68,4 +72,3 @@ public abstract class User implements Serializable {
      */
     public abstract String getFormattedText();
 }
-
