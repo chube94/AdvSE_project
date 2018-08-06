@@ -1,7 +1,11 @@
 package hardwarestore;
 
 public class Appliances extends Item {
-    protected final String brand;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected final String brand;
     protected final String type;
 
     /**
