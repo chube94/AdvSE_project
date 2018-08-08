@@ -23,18 +23,28 @@ import java.io.IOException;
 public class MainApp extends JFrame implements ItemListener{
 
 	/**
-	 * 
+	 * used to serialize input and output files 
 	 */
 	private static final long serialVersionUID = 1L;
-	// This object is used to log all User interactions with the GUI and for possible errors and exceptions
+	/**
+	 *  This object is used to log all User interactions with the GUI and for possible errors and exceptions
+	 */
 	private static final Logger logger = Logger.getLogger(MainApp.class.getName());
-	//This object is used to write all logging messages to a file
+	/**
+	 * This object is used to write all logging messages to a file
+	 */
 	private static FileHandler fh = null;
-    // This object will allow us to interact with the methods of the class HardwareStore
-    private HardwareStore hardwareStore;
-    
+    /**
+     *  This object will allow us to interact with the methods of the class HardwareStore
+     */
+    private HardwareStore hs;
+    /**
+     * used to provide a layout for the GUI main frame 
+     */
     JPanel cards;
-    
+    /**
+     * used to handle an ItemEvent when user clicks the tab on the GUI main frame
+     */
     public void itemStateChanged(ItemEvent evt) {
         CardLayout cl = (CardLayout)(cards.getLayout());
         cl.show(cards, (String)evt.getItem());
@@ -46,7 +56,7 @@ public class MainApp extends JFrame implements ItemListener{
      * @throws IOException
      */
     public MainApp() throws IOException {
-        hardwareStore = new HardwareStore();
+        hs = new HardwareStore();
         try
         {
           fh = new FileHandler("LoggingMessages.log", false);
@@ -61,16 +71,16 @@ public class MainApp extends JFrame implements ItemListener{
     }
 
     /**
-     * This method is called to save the database before exit the system.
+     * used to save the database when the user exits the main frame
      * @throws IOException
      */
     public void saveDatabase() throws IOException {
-        hardwareStore.writeDatabase();
+        hs.writeDatabase();
     }
 
 
 /**
-*This method is used to create the GUI main frame that holds all of the GUI components
+*used to create the GUI main frame that holds all of the GUI components
 *used in this program.
 */
      public void createFrame() throws Exception{
@@ -136,7 +146,7 @@ public class MainApp extends JFrame implements ItemListener{
 */
            public void actionPerformed(ActionEvent e){
            HardwareStore.sortItemList();
-           String str = hardwareStore.getAllItemsFormatted();
+           String str = hs.getAllItemsFormatted();
            JTextArea showAllItemsTextArea = new JTextArea(str);
            JFrame displayAllItemsFrame = new JFrame("Displaying List of Items");
            displayAllItemsFrame.setSize(500, 100);
@@ -161,7 +171,7 @@ public class MainApp extends JFrame implements ItemListener{
                Integer quantity = 0;
                int indexToAddTo = 0;
                id = JOptionPane.showInputDialog("ID of Item you wish to add quantity to: ");
-               indexToAddTo = hardwareStore.findItemIndex(id);
+               indexToAddTo = hs.findItemIndex(id);
                if (indexToAddTo == -1){
             	   addQuantityToItemPanel.setVisible(false);
                }
@@ -178,7 +188,7 @@ public class MainApp extends JFrame implements ItemListener{
                  logger.log(Level.SEVERE, ex.getMessage(), ex);
                  System.out.println("Could not delete Item");
                }
-               hardwareStore.addQuantity(indexToAddTo, quantity);
+               hs.addQuantity(indexToAddTo, quantity);
                logger.info("User deletes specified quantity from given Item ");
 
                 logger.info("User deletes Item from list");
@@ -192,7 +202,7 @@ public class MainApp extends JFrame implements ItemListener{
     		             String num = JOptionPane.showInputDialog("Name of Item to search for : ");
     		             try {
     		            	 int number = Integer.parseInt(num);
-    		            	 String str = hardwareStore.getMatchingItemsByQuantity(number);
+    		            	 String str = hs.getMatchingItemsByQuantity(number);
     		            	 JTextArea matchingItemsTextArea = new JTextArea(str);
     		            	 JFrame displayItemsBelowGivenQuantityFrame = new JFrame("Displaying List of Items Below Given Quantity");
     		            	 displayItemsBelowGivenQuantityFrame.setSize(500, 100);
@@ -288,7 +298,7 @@ public class MainApp extends JFrame implements ItemListener{
                     quantity = Integer.parseInt(quantityField.getText().trim());
                     price = Float.parseFloat(priceField.getText().trim());
                     addNewHardwareItemPanel.setLayout(new FlowLayout());
-                    hardwareStore.addNewSmallHardwareItem(id,  name,  quantity,  price,  category);
+                    hs.addNewSmallHardwareItem(id,  name,  quantity,  price,  category);
                     logger.info("User adds new Hardware Item");
                   }
                   catch (NumberFormatException ex)
@@ -359,7 +369,7 @@ public class MainApp extends JFrame implements ItemListener{
                 quantity = Integer.parseInt(quantityField.getText().trim());
                 price = Float.parseFloat(priceField.getText().trim());
                 addNewApplianceItemPanel.setLayout(new FlowLayout());
-                hardwareStore.addNewAppliance(id,  name,  quantity,  price, brand,  type);
+                hs.addNewAppliance(id,  name,  quantity,  price, brand,  type);
                 logger.info("User adds new Appliance Item");
               }
               catch (NumberFormatException ex)
@@ -394,7 +404,7 @@ public class MainApp extends JFrame implements ItemListener{
              Integer quantity = 0;
              int indexToRemove = 0;
              id = JOptionPane.showInputDialog("ID of Item you wish to delete: ");
-             indexToRemove = hardwareStore.findItemIndex(id);
+             indexToRemove = hs.findItemIndex(id);
              if (indexToRemove == -1){
             	 deleteItemPanel.setVisible(false);
              }
@@ -411,10 +421,10 @@ public class MainApp extends JFrame implements ItemListener{
                logger.log(Level.SEVERE, ex.getMessage(), ex);
                System.out.println("Could not delete Item");
              }
-             hardwareStore.removeQuantity(indexToRemove, quantity);
+             hs.removeQuantity(indexToRemove, quantity);
              logger.info("User deletes specified quantity from given Item ");
-             if( hardwareStore.findItem(id).getQuantity() < 0)
-              hardwareStore.removeItem(indexToRemove);
+             if( hs.findItem(id).getQuantity() < 0)
+              hs.removeItem(indexToRemove);
               logger.info("User deletes Item from list");
            }});
 
@@ -429,7 +439,7 @@ public class MainApp extends JFrame implements ItemListener{
            public void actionPerformed(ActionEvent e){
              String name = "";
              name = JOptionPane.showInputDialog("Name of Item to search for : ");
-             String str = hardwareStore.getMatchingItemsByName(name);
+             String str = hs.getMatchingItemsByName(name);
              JTextArea matchingItemsTextArea = new JTextArea(str);
              JFrame displayItemsWithGivenNameFrame = new JFrame("Displaying List of Items with Given Name");
              displayItemsWithGivenNameFrame.setSize(500, 100);
@@ -450,7 +460,7 @@ public class MainApp extends JFrame implements ItemListener{
 *@param e is when the user clicks button5
 */
            public void actionPerformed(ActionEvent e){
-           String str = hardwareStore.getAllUsersFormatted();
+           String str = hs.getAllUsersFormatted();
            JTextArea showUsersTextArea = new JTextArea(str);
            JFrame showUsersFrame = new JFrame("Displaying List of Users");
            showUsersFrame.setSize(500, 100);
@@ -516,7 +526,7 @@ public class MainApp extends JFrame implements ItemListener{
                ssn = Integer.parseInt(ssnField.getText().trim());
                Float salary = Float.parseFloat(salaryField.getText().trim());
                addEmployeePanel.setLayout(new FlowLayout());
-               hardwareStore.addEmployee(firstName,  lastName,  ssn,  salary);
+               hs.addEmployee(firstName,  lastName,  ssn,  salary);
                logger.info("User adds new Employee");
              }
              catch (NumberFormatException ex)
@@ -564,7 +574,7 @@ public class MainApp extends JFrame implements ItemListener{
                phoneNumber = phoneNumberField.getText().trim();
                address = addressField.getText().trim();
                addCustomerPanel.setLayout(new FlowLayout());
-               hardwareStore.addCustomer(firstName,  lastName,  phoneNumber,  address);
+               hs.addCustomer(firstName,  lastName,  phoneNumber,  address);
                logger.info("User adds new Customer");
              }
              catch (NumberFormatException ex)
@@ -609,10 +619,10 @@ public class MainApp extends JFrame implements ItemListener{
 */
            public void actionPerformed(ActionEvent e) throws NumberFormatException {
              int id = Integer.parseInt(JOptionPane.showInputDialog("ID of Employee : "));
-             int index = hardwareStore.findUserIndex(id);
+             int index = hs.findUserIndex(id);
              while (index == -1){
                id = Integer.parseInt(JOptionPane.showInputDialog("Employee not found, please enter new Employee ID: "));
-               index = hardwareStore.findUserIndex(id);
+               index = hs.findUserIndex(id);
              }
 
              JTextField firstNameField = new JTextField(10);
@@ -642,7 +652,7 @@ public class MainApp extends JFrame implements ItemListener{
                ssn = Integer.parseInt(ssnField.getText().trim());
                Float salary = Float.parseFloat(salaryField.getText().trim());
                updateEmployeePanel.setLayout(new FlowLayout());
-               hardwareStore.editEmployeeInformation(id, firstName,  lastName,  ssn,  salary);
+               hs.editEmployeeInformation(id, firstName,  lastName,  ssn,  salary);
                logger.info("User Updates Employee Info");
              }
              catch (NumberFormatException ex)
@@ -665,10 +675,10 @@ public class MainApp extends JFrame implements ItemListener{
 */
            public void actionPerformed(ActionEvent e) throws NumberFormatException {
              int id = Integer.parseInt(JOptionPane.showInputDialog("ID of Customer : "));
-             int index = hardwareStore.findUserIndex(id);
+             int index = hs.findUserIndex(id);
              while (index == -1){
                id = Integer.parseInt(JOptionPane.showInputDialog("Customer not found, please enter new Customer ID: "));
-               index = hardwareStore.findUserIndex(id);
+               index = hs.findUserIndex(id);
              }
              JTextField firstNameField = new JTextField(10);
              JTextField lastNameField = new JTextField(10);
@@ -698,7 +708,7 @@ public class MainApp extends JFrame implements ItemListener{
                phoneNumber = phoneNumberField.getText().trim();
                address = addressField.getText().trim();
                updateCustomerPanel.setLayout(new FlowLayout());
-               hardwareStore.editCustomerInformation(id, firstName,  lastName,  phoneNumber,  address);
+               hs.editCustomerInformation(id, firstName,  lastName,  phoneNumber,  address);
                logger.info("User Updates Customer Info");
              }
              catch (NumberFormatException ex)
@@ -724,24 +734,24 @@ public class MainApp extends JFrame implements ItemListener{
 */
        public void actionPerformed(ActionEvent e){
          String itemID = JOptionPane.showInputDialog("ID of Item : ");
-         int itemIndex = hardwareStore.findItemIndex(itemID);
+         int itemIndex = hs.findItemIndex(itemID);
          while(itemIndex == -1){
            itemID = JOptionPane.showInputDialog("ID not found, enter a new ID : ");
-           itemIndex = hardwareStore.findItemIndex(itemID);
+           itemIndex = hs.findItemIndex(itemID);
            break;
          }
          int customerID = Integer.parseInt(JOptionPane.showInputDialog("ID of Customer : "));
-         int customerIndex = hardwareStore.findUserIndex(customerID);
+         int customerIndex = hs.findUserIndex(customerID);
          while(customerIndex == -1){
            customerID = Integer.parseInt(JOptionPane.showInputDialog("ID not found, enter a new ID : "));
-           customerIndex = hardwareStore.findUserIndex(customerID);
+           customerIndex = hs.findUserIndex(customerID);
            break;
          }
          int employeeID = Integer.parseInt(JOptionPane.showInputDialog("ID of Employee : "));
-         int employeeIndex = hardwareStore.findUserIndex(employeeID);
+         int employeeIndex = hs.findUserIndex(employeeID);
          while(employeeIndex == -1){
            employeeID = Integer.parseInt(JOptionPane.showInputDialog("ID not found, enter a new ID : "));
-           employeeIndex = hardwareStore.findUserIndex(employeeID);
+           employeeIndex = hs.findUserIndex(employeeID);
            break;
          }
          int quantitySold = Integer.parseInt(JOptionPane.showInputDialog("Quantity of Items Sold : "));
@@ -749,10 +759,10 @@ public class MainApp extends JFrame implements ItemListener{
            quantitySold = Integer.parseInt(JOptionPane.showInputDialog("Quantity Sold Must be a Positive Integer : "));
            break;
          }
-         hardwareStore.progressTransaction(itemID, quantitySold, customerID, employeeID, itemIndex);
-         if( hardwareStore.findItem(itemID).getQuantity() < 1) {
-        	 int indexToRemove = hardwareStore.findItemIndex(itemID);
-             hardwareStore.removeItem(indexToRemove);
+         hs.progressTransaction(itemID, quantitySold, customerID, employeeID, itemIndex);
+         if( hs.findItem(itemID).getQuantity() < 1) {
+        	 int indexToRemove = hs.findItemIndex(itemID);
+             hs.removeItem(indexToRemove);
          }
          logger.info("User Completes a Transaction");
        }});
@@ -765,7 +775,7 @@ public class MainApp extends JFrame implements ItemListener{
 *@param e is when the user clicks button9
 */
           public void actionPerformed(ActionEvent e){
-          String str = hardwareStore.getAllTransactionsFormatted();
+          String str = hs.getAllTransactionsFormatted();
           JTextArea showTransactionsTextArea = new JTextArea(str);
           JFrame showTransactionsFrame = new JFrame("Displaying List of Transactions");
           showTransactionsFrame.setSize(500, 100);
