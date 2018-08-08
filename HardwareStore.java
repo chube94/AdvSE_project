@@ -9,14 +9,29 @@ import java.util.*;
  */
 public class HardwareStore {
 
+	/**
+	 * used to store items inside an ArrayList
+	 */
     private static ArrayList<Item> itemList;
+    /**
+     * used to store users inside an ArrayList
+     */
     private static ArrayList<User> userList;
+    /**
+     * used to store transactions inside an ArrayList
+     */
     private static ArrayList<Transaction> transactionList;
+    /**
+     * used to increment userID by 1 each time a new user is added
+     */
     private static int userIdCounter;
-
+    /**
+     * used to serialize input and output data to file 
+     */
     private static final String DATA_FILE_NAME = "database.ser";
 
     /**
+     * Default constructor. Reads information from database ands sets itemList, userList, and transactionList equal to input data objects
      * @throws IOException
      */
     public HardwareStore() throws IOException {
@@ -24,7 +39,7 @@ public class HardwareStore {
     }
 
     /**
-     * Method getAllItemsFormatted returns the current list of items in the Arraylist
+     * returns the current list of items in the Arraylist 
      * 
      * @return a formatted String representation of all the items in itemList.
      */
@@ -93,10 +108,10 @@ public class HardwareStore {
     }
 
     /**
-     * used as a method to return a given ArrayList of items in a formatted manner.
+     * used as a method to return an ArrayList of transactions
      *
      * @param transactions the transaction list to be displayed.
-     * @return a formatted String representation of all the items in the list give as a parameter.
+     * @return a formatted String of all the items in the list 
      */
     private String getFormattedTransactionList(ArrayList<Transaction> transactions) {
 
@@ -130,7 +145,7 @@ public class HardwareStore {
     }
 
     /**
-     * used to add an appliance to the itemList ArrayList.
+     * used to add an appliance to the itemList 
      *
      * @param idNumber a String representing the ID number of item
      * @param name a String representing the name of item
@@ -147,6 +162,8 @@ public class HardwareStore {
 
 
     /**
+     * used to add a customer to the userList
+     * 
      * @param firstName a String representing the first name of user
      * @param lastName a String representing the last name of user
      * @param phoneNumber a String representing the telephone number of user
@@ -159,6 +176,8 @@ public class HardwareStore {
     }
 
     /**
+     * used to add an Employee to the userList
+     * 
      * @param firstName a String representing the first name of user
      * @param lastName a String representing the last name of user
      * @param ssn an int representing the ssn of user
@@ -172,7 +191,8 @@ public class HardwareStore {
 
 
     /**
-     * Adds a certain quantity of the given item index.
+     * Adds a given quantity of the given item index
+     * 
      * @param itemIndex the index of the item in the itemList
      * @param quantity  the quantity to add
      */
@@ -183,7 +203,8 @@ public class HardwareStore {
     }
 
     /**
-     * Removes a certain quantity of the given item index. 
+     * Removes a given quantity of the given item index
+     * 
      * @param itemIndex the index of the item in the itemList
      * @param quantity  the quantity to remove
      */
@@ -194,7 +215,8 @@ public class HardwareStore {
     }
 
     /**
-     * Returns all the items that match the given name.
+     * Returns all the items that match the given name
+     * 
      * @param name the name to match.
      * @return a string containing a table of the matching items.
      */
@@ -214,10 +236,10 @@ public class HardwareStore {
     }
 
     /**
-     * Returns all the items with current quantity lower than the given int
+     * Returns all the items with a quantity lower than the given int
      * 
      * @param quantity the quantity threshold.
-     * @return a string containing a table of the matching items.
+     * @return a string containing the items that have a quantity lower than the given int
      */
     public String getMatchingItemsByQuantity(int quantity) {
         ArrayList<Item> temp = new ArrayList<Item>();
@@ -234,12 +256,12 @@ public class HardwareStore {
     }
 
     /**
-     * used to find a item in the Arraylist of items.
+     * used to find a item in the itemList
      *
      * @param id a String that represents the ID of
      * the item that to be searched for.
      * @return the Item in the Arraylist of
-     * items, or null if the search failed.
+     * items, or null if the item is not in the list
      */
     public Item findItem(String id) {
         Item item = null;
@@ -255,12 +277,12 @@ public class HardwareStore {
 
 
     /**
-     * used to find a item in the Arraylist of items.
+     * used to find the index of an item in the itemList
      *
-     * @param idNumber a String that represents the ID number of
-     * the item that to be searched for.
+     * @param idNumber string that represents the ID number of
+     * the item that the user is searching for
      * @return the int index of the items in the Arraylist of
-     * items, or -1 if the search failed.
+     * items, or -1 if the item is not in the list
      */
     public int findItemIndex(String idNumber) {
         int index = -1;
@@ -276,12 +298,12 @@ public class HardwareStore {
     }
 
     /**
-     * used to find a user in the Arraylist of users.
+     * used to find a user in the userList
      *
      * @param id an int that represents the ID of
-     * the user that to be searched for.
+     * the user that the user is searching for 
      * @return the User in the Arraylist of
-     * users, or null if the search failed.
+     * users, or null if the user is not in the list 
      */
     public User findUser(int id) {
         User user = null;
@@ -296,12 +318,12 @@ public class HardwareStore {
 
 
     /**
-     * used to find the index of user in the Arraylist of users.
+     * used to find the index of user in the userList
      *
      * @param id a String that represents the ID of
-     * the user that to be searched for.
+     * the user that the user is searching for 
      * @return the int index of the user in the Arraylist of
-     * users, or -1 if the search failed.
+     * users, or -1 if the user is not in the list
      */
     public int findUserIndex(int id) {
         int index = -1;
@@ -314,7 +336,8 @@ public class HardwareStore {
         return index;
     }
     /**
-     * used to edit information of an customer.
+     * used to modify customer attributes
+     * 
      * @param idInput the int index of the user's ID
      * @param firstName a String representing the first name of user
      * @param lastName a String representing the last name of user
@@ -330,7 +353,8 @@ public class HardwareStore {
 
 
     /**
-     * used to edit information of an employee.
+     * used to modify employee attributes
+     * 
      * It will first remove the old entry and add a new one with same user ID
      * @param idInput the int index of the user's ID
      * @param firstName a String representing the first name of user
@@ -346,22 +370,20 @@ public class HardwareStore {
     }
 
     /**
-     * used to remove a item in the Arraylist of items.
+     * used to remove a item in the itemList
      *
      * @param itemIndex an int that represents the Index of
-     * the item in the list that to be removed.
+     * the item in the list that the user wants to delete
      */
     public void removeItem(int itemIndex) {
         itemList.remove(itemIndex);
     }
 
     /**
-     * used to retrieve the Item object from the
-     * itemList at a given index.
+     * used to retrieve the Item  from the itemList with the input index
      *
-     * @param i the index of the desired Item object.
-     * @return the Item object at the index or null if the index is
-     * invalid.
+     * @param i the index of the Item 
+     * @return the Item  at the index or null if the index is not found
      */
     public Item getItem(int i) {
         if (i < itemList.size() && i >= 0) {
@@ -373,9 +395,9 @@ public class HardwareStore {
     }
     
     /**
-     * used to retrieve the User object from the userList at the given index 
+     * used to retrieve the User  from the userList with the input index
      * 
-     * @param i the index of the desired User object
+     * @param i the index of the User 
      * @return the User object at the index or null if their index is invalid
      */
     public User getUser(int i) {
@@ -389,12 +411,13 @@ public class HardwareStore {
     
 
     /**
-     * adds a transaction to the list, and removes the quantity for the target item.
+     * adds a transaction to the list, and removes the quantity for the item being sold
+     * 
      * @param itemId a String representing the ID of item
      * @param saleQuantity an int of the quantity
      * @param customerId an int representing the ID of customer
      * @param employeeId an int representing the ID of employee
-     * @param itemIndex an int representing the index of item in the list, used to reduce the quantity.
+     * @param itemIndex an int representing the index of item in the list
      */
     public void progressTransaction(String itemId, int saleQuantity, int customerId, int employeeId, int itemIndex) {
         transactionList.add(new Transaction(itemId, new Date(), saleQuantity, customerId, employeeId));
@@ -403,10 +426,7 @@ public class HardwareStore {
 
     /**
      * opens the database file and overwrites it with a
-     * serialized representation of all the items in the itemList,
-     * all users in the userList, all transactions in the
-     * transactionList, and the userIdCounter.
-     * This should be the last method to be called before exiting the program.
+     * serialized representation items, users, and transactions
      *
      * @throws IOException
      */
@@ -435,12 +455,8 @@ public class HardwareStore {
     }
 
     /**
-     * opens the database file and initializes the itemList,
-     * userList, transactionList and the userIdCounter
-     * with their contents. If no such file exists, then one is created.
-     * The contents of the file are "loaded" into the itemList ArrayList in no 
-     * particular order. The file is then closed during the duration of the 
-     * program until writeDatabase() is called.
+     * opens the database file and initializes the itemList, userList, transactionList and the userIdCounter. If the file
+     * does not exist yet, then it is created
      *
      * @throws IOException
      */
@@ -486,7 +502,7 @@ public class HardwareStore {
     }
 
     /**
-     * used to close a file and handle exceptions that might occur
+     * used to close a file and handle the exceptions if they exist
      *
      * @param c
      */
@@ -502,7 +518,7 @@ public class HardwareStore {
     }
 
     /**
-     * sorts the item list, based on the item ID.
+     * sorts the item list by the ID number
      */
     public static void sortItemList() {
         itemList.sort(new Comparator<Item>() {
@@ -518,7 +534,7 @@ public class HardwareStore {
 
     }
     /**
-     * sorts the user list, based on the user ID.
+     * sorts the user list by the ID number
      */
     public static void sortUserList() {
         userList.sort(new Comparator<User>() {
