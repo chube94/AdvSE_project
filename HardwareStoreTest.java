@@ -48,6 +48,7 @@ public class HardwareStoreTest {
 	
 	@Test
 	public void shouldAddNewApplianceItem() throws IOException {
+		itemList = null;
 		hardwareStore.addNewAppliance("aaa11", "Fridge2000", 100, (float)499.99, "LG", "Refrigerators");
 		Item itemAdded = hardwareStore.getItem(0);
 		Item expectedItem = hardwareStore.findItem("aaa11");
@@ -56,6 +57,7 @@ public class HardwareStoreTest {
 	
 	@Test
 	public void shouldAddNewCustomer(){
+		userList = null;
 		hardwareStore.addCustomer("William", "Hubert", "512-618-2740", "1001 Ell Rd.");
 		User userAdded = hardwareStore.findUser(1);
 		//first user ID should be 1
@@ -65,17 +67,19 @@ public class HardwareStoreTest {
 	
 	@Test
 	public void shouldAddNewEmployee(){
+		userList = null;
 		hardwareStore.addEmployee("Warren", "Hubert", 627534008, (float)1199.99);
-		User userAdded = hardwareStore.findUser(2);
+		User userAdded = hardwareStore.findUser(1);
 		//first user ID should be 1
-		User expectedUser = hardwareStore.getUser(1);
+		User expectedUser = hardwareStore.getUser(0);
 		assertEquals("addNewCustomer test has failed...", userAdded, expectedUser);
 	}
 	
 	@Test
 	public void shouldAddNewHardwareItem() throws IOException {
+		itemList = null;
 		hardwareStore.addNewSmallHardwareItem("wch45", "Doorknob 3in", 44, (float)19.95, "Other");
-		Item itemAdded = hardwareStore.getItem(1);
+		Item itemAdded = hardwareStore.getItem(0);
 		Item expectedItem = hardwareStore.findItem("wch45");
 		assertEquals("addNewSmallHardwareItem test has failed...", expectedItem, itemAdded);
 	}
@@ -83,9 +87,10 @@ public class HardwareStoreTest {
 	
 	@Test
 	public void shouldFindItemIndex() {
+		itemList = null;
 		hardwareStore.addNewSmallHardwareItem("wch45", "Doorknob 3in", 44, (float)19.95, "Other");
 		int itemToBeFound = hardwareStore.findItemIndex("wch45");
-		assertEquals("findItem test has failed...", itemToBeFound, 1);
+		assertEquals("findItem test has failed...", itemToBeFound, 0);
 	}
 	
 	@Test
@@ -103,32 +108,35 @@ public class HardwareStoreTest {
 	
 	@Test
 	public void shouldAddGivenQuantity() {
+		itemList = null;
 		int givenQuantity = 5;
 		hardwareStore.addNewSmallHardwareItem("wch45", "Doorknob 3in", 44, (float)19.95, "Other");
-		hardwareStore.addQuantity(1, givenQuantity);
-		Item item = hardwareStore.getItem(1);
+		hardwareStore.addQuantity(0, givenQuantity);
+		Item item = hardwareStore.getItem(0);
 		int newQuantity = item.getQuantity();
 		assertEquals("addQuantity test has failed...", newQuantity, 49);
-		hardwareStore.addQuantity(1, givenQuantity);
+		hardwareStore.addQuantity(0, givenQuantity);
 		newQuantity = item.getQuantity();
 		assertEquals("addQuantity test has failed...", newQuantity, 54);		
 	}
 	
 	@Test
 	public void shouldRemoveGivenQuantity() {
+		itemList = null;
 		int givenQuantity = 5;
 		hardwareStore.addNewSmallHardwareItem("wch45", "Doorknob 3in", 44, (float)19.95, "Other");
-		hardwareStore.removeQuantity(1, givenQuantity);
-		Item item = hardwareStore.getItem(1);
+		hardwareStore.removeQuantity(0, givenQuantity);
+		Item item = hardwareStore.getItem(0);
 		int newQuantity = item.getQuantity();
 		assertEquals("addQuantity test has failed...", newQuantity, 39);
-		hardwareStore.removeQuantity(1, givenQuantity);
+		hardwareStore.removeQuantity(0, givenQuantity);
 		newQuantity = item.getQuantity();
 		assertEquals("addQuantity test has failed...", newQuantity, 34);		
 	}
 	
 	@Test
 	public void shouldGetMatchingItemsByQuantity(){
+		itemList = null;
 		hardwareStore.addNewAppliance("aaa11", "Fridge2000", 100, (float)499.99, "LG", "Refrigerators");
 		hardwareStore.addNewAppliance("bbb22", "x150Fridge", 50, (float)649.95, "Samsung", "Refrigerators");
 		expectedItemList.add(new Appliances("aaa11", "Fridge2000", 100, (float)499.99, "LG", "Refrigerators"));
@@ -145,6 +153,7 @@ public class HardwareStoreTest {
 	
 	@Test
 	public void shouldGetMatchingItemsByNam(){
+		itemList = null;
 		hardwareStore.addNewAppliance("aaa11", "Fridge2000", 100, (float)499.99, "LG", "Refrigerators");
 		hardwareStore.addNewAppliance("bbb22", "x150Fridge", 50, (float)649.95, "Samsung", "Refrigerators");
 		expectedItemList.add(new Appliances("aaa11", "Fridge2000", 100, (float)499.99, "LG", "Refrigerators"));
@@ -160,6 +169,7 @@ public class HardwareStoreTest {
 	
 	@Test
 	public void shouldFindItem(){
+		itemList = null;
 		hardwareStore.addNewAppliance("aaa11", "Fridge2000", 100, (float)499.99, "LG", "Refrigerators");
 		hardwareStore.addNewAppliance("bbb22", "x150Fridge", 50, (float)649.95, "Samsung", "Refrigerators");
 		Item itemFound = hardwareStore.findItem("aaa11");
@@ -170,7 +180,5 @@ public class HardwareStoreTest {
 		//no item with given ID exists, therefore it should return null
 		assertNull("findItem test has failed...", itemFound);
 	}
-	
-	
 
 }
