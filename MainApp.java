@@ -17,7 +17,7 @@ import java.io.IOException;
  * This is the main class of the Hardware Store database manager. It provides a
  * GUI for the user to input data
  *
- * @author William Hubert
+ * @author Warren Hubert, William Hubert
  * @version 7-30-18
  */
 public class MainApp extends JFrame implements ItemListener{
